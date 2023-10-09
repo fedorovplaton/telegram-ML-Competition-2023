@@ -42,6 +42,15 @@ def get_repositories_with_lang(
                 if repo_info.get("private", True) or repo_info.get("fork", True):
                     continue
                 url = repo_info["url"]
+
+                try:
+                    tree = requests.get(
+                        "/".join([url, "git/trees/master?recursive=1"]),
+                        headers=HEADERS
+                    ).json()["tree"]
+                except KeyError:
+                    continue
+
                 yield dict(
                     id=repo_info["id"],
                     name=repo_info["full_name"],
@@ -49,11 +58,8 @@ def get_repositories_with_lang(
                         os.path.join(url, "languages"),
                         headers=HEADERS
                     ).json(),
-                    contents=requests.get(
-                        "/".join([url, "git/trees/master?recursive=1"]),
-                        headers=HEADERS
-                    ).json(),
-                )
+                    files=list(map(lambda d: d["path"], tree)),
+                    )
         elif response.status_code == 403:
             sleep(BAN_SEC)
         else:
@@ -61,19 +67,20 @@ def get_repositories_with_lang(
 
 
 if __name__ == "__main__":
+    step = 1
     with open(mapping_json, "r") as fp:
         langs_mapping: dict = json.load(fp)
-        for lang_info in langs_mapping.values():
-            language = lang_info["git_lang"]
-            if not language:
-                continue
-            stats = [
-                res
-                for res in tqdm(
-                    get_repositories_with_lang(language, max_page=MAX_PAGE),
-                    desc=language,
-                    total=PER_PAGE * MAX_PAGE
-                )
-            ]
-            with open(save_dir / f"{language}.json", "w") as fp:
-                json.dump(stats, fp, indent=4)
+    for lang_info in list(langs_mapping.values())[::step]:
+        language = lang_info["git_lang"]
+        if not language:
+            continue
+        stats = [
+            res
+            for res in tqdm(
+                get_repositories_with_lang(language, max_page=MAX_PAGE),
+                desc=language,
+                total=PER_PAGE * MAX_PAGE
+            )
+        ]
+        with open(save_dir / f"{language}.json", "w") as fp:
+            json.dump(stats, fp)
