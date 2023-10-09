@@ -17,6 +17,10 @@ MAX_PAGE = 10
 PER_PAGE = 100
 save_dir = Path("git_stats/")
 
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+    print("The new directory is created!")
+
 mapping_json = "tglang_2_gitlang_mapping.json"
 
 
