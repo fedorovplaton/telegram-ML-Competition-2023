@@ -1,0 +1,1145 @@
+{
+    "TGLANG_LANGUAGE_OTHER": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_1S_ENTERPRISE": {
+        "git_lang": "1C Enterprise",
+        "git_type": "programming",
+        "git_extensions": [
+            ".bsl",
+            ".os"
+        ]
+    },
+    "TGLANG_LANGUAGE_APACHE_GROOVY": {
+        "git_lang": "Groovy",
+        "git_type": "programming",
+        "git_extensions": [
+            ".groovy",
+            ".grt",
+            ".gtpl",
+            ".gvy"
+        ]
+    },
+    "TGLANG_LANGUAGE_ASP": {
+        "git_lang": "Classic ASP",
+        "git_type": "programming",
+        "git_extensions": [
+            ".asp"
+        ]
+    },
+    "TGLANG_LANGUAGE_BATCH": {
+        "git_lang": "Batchfile",
+        "git_type": "programming",
+        "git_extensions": [
+            ".bat",
+            ".cmd"
+        ]
+    },
+    "TGLANG_LANGUAGE_COFFESCRIPT": {
+        "git_lang": "CoffeeScript",
+        "git_type": "programming",
+        "git_extensions": [
+            ".coffee",
+            "._coffee",
+            ".cake",
+            ".cjsx",
+            ".iced"
+        ]
+    },
+    "TGLANG_LANGUAGE_COMMON_LISP": {
+        "git_lang": "Common Lisp",
+        "git_type": "programming",
+        "git_extensions": [
+            ".lisp",
+            ".asd",
+            ".cl",
+            ".l",
+            ".lsp",
+            ".ny",
+            ".podsl",
+            ".sexp"
+        ]
+    },
+    "TGLANG_LANGUAGE_CPLUSPLUS": {
+        "git_lang": "C++",
+        "git_type": "programming",
+        "git_extensions": [
+            ".cpp",
+            ".c++",
+            ".cc",
+            ".cp",
+            ".cxx",
+            ".h",
+            ".h++",
+            ".hpp",
+            ".hxx",
+            ".inc",
+            ".inl",
+            ".ino",
+            ".ipp",
+            ".re",
+            ".tcc",
+            ".tpp"
+        ]
+    },
+    "TGLANG_LANGUAGE_CSHARP": {
+        "git_lang": "C#",
+        "git_type": "programming",
+        "git_extensions": [
+            ".cs",
+            ".cake",
+            ".csx",
+            ".linq"
+        ]
+    },
+    "TGLANG_LANGUAGE_DELPHI": {
+        "git_lang": "Component Pascal",
+        "git_type": "programming",
+        "git_extensions": [
+            ".cp",
+            ".cps"
+        ]
+    },
+    "TGLANG_LANGUAGE_DOCKER": {
+        "git_lang": "Dockerfile",
+        "git_type": "programming",
+        "git_extensions": [
+            ".dockerfile"
+        ]
+    },
+    "TGLANG_LANGUAGE_FSHARP": {
+        "git_lang": "F#",
+        "git_type": "programming",
+        "git_extensions": [
+            ".fs",
+            ".fsi",
+            ".fsx"
+        ]
+    },
+    "TGLANG_LANGUAGE_LATEX": {
+        "git_lang": "TeX",
+        "git_type": "markup",
+        "git_extensions": [
+            ".tex",
+            ".aux",
+            ".bbx",
+            ".cbx",
+            ".cls",
+            ".dtx",
+            ".ins",
+            ".lbx",
+            ".ltx",
+            ".mkii",
+            ".mkiv",
+            ".mkvi",
+            ".sty",
+            ".toc"
+        ]
+    },
+    "TGLANG_LANGUAGE_OBJECTIVE_C": {
+        "git_lang": "Objective-C",
+        "git_type": "programming",
+        "git_extensions": [
+            ".m",
+            ".h"
+        ]
+    },
+    "TGLANG_LANGUAGE_OPENEDGE_ABL": {
+        "git_lang": "OpenEdge ABL",
+        "git_type": "programming",
+        "git_extensions": [
+            ".p",
+            ".cls",
+            ".w"
+        ]
+    },
+    "TGLANG_LANGUAGE_PL_SQL": {
+        "git_lang": "PLSQL",
+        "git_type": "programming",
+        "git_extensions": [
+            ".pls",
+            ".bdy",
+            ".ddl",
+            ".fnc",
+            ".pck",
+            ".pkb",
+            ".pks",
+            ".plb",
+            ".plsql",
+            ".prc",
+            ".spc",
+            ".sql",
+            ".tpb",
+            ".tps",
+            ".trg",
+            ".vw"
+        ]
+    },
+    "TGLANG_LANGUAGE_PROTOBUF": {
+        "git_lang": "Protocol Buffer",
+        "git_type": "data",
+        "git_extensions": [
+            ".proto"
+        ]
+    },
+    "TGLANG_LANGUAGE_REGEX": {
+        "git_lang": "Regular Expression",
+        "git_type": "data",
+        "git_extensions": [
+            ".regexp",
+            ".regex"
+        ]
+    },
+    "TGLANG_LANGUAGE_TL": {
+        "git_lang": "Type Language",
+        "git_type": "data",
+        "git_extensions": [
+            ".tl"
+        ]
+    },
+    "TGLANG_LANGUAGE_VISUAL_BASIC": {
+        "git_lang": "VBA",
+        "git_type": "programming",
+        "git_extensions": [
+            ".bas",
+            ".cls",
+            ".frm",
+            ".frx",
+            ".vba"
+        ]
+    },
+    "TGLANG_LANGUAGE_FIFT": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_FUNC": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_ICON": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_KEYMAN": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_LISP": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_LOGO": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_WOLFRAM": {
+        "git_lang": "",
+        "git_type": "",
+        "git_extensions": []
+    },
+    "TGLANG_LANGUAGE_ABAP": {
+        "git_lang": "ABAP",
+        "git_type": "programming",
+        "git_extensions": [
+            ".abap"
+        ]
+    },
+    "TGLANG_LANGUAGE_ACTIONSCRIPT": {
+        "git_lang": "ActionScript",
+        "git_type": "programming",
+        "git_extensions": [
+            ".as"
+        ]
+    },
+    "TGLANG_LANGUAGE_ADA": {
+        "git_lang": "Ada",
+        "git_type": "programming",
+        "git_extensions": [
+            ".adb",
+            ".ada",
+            ".ads"
+        ]
+    },
+    "TGLANG_LANGUAGE_APEX": {
+        "git_lang": "Apex",
+        "git_type": "programming",
+        "git_extensions": [
+            ".cls",
+            ".trigger"
+        ]
+    },
+    "TGLANG_LANGUAGE_APPLESCRIPT": {
+        "git_lang": "AppleScript",
+        "git_type": "programming",
+        "git_extensions": [
+            ".applescript",
+            ".scpt"
+        ]
+    },
+    "TGLANG_LANGUAGE_ASSEMBLY": {
+        "git_lang": "Assembly",
+        "git_type": "programming",
+        "git_extensions": [
+            ".asm",
+            ".a51",
+            ".i",
+            ".inc",
+            ".nas",
+            ".nasm"
+        ]
+    },
+    "TGLANG_LANGUAGE_AUTOHOTKEY": {
+        "git_lang": "AutoHotkey",
+        "git_type": "programming",
+        "git_extensions": [
+            ".ahk",
+            ".ahkl"
+        ]
+    },
+    "TGLANG_LANGUAGE_AWK": {
+        "git_lang": "Awk",
+        "git_type": "programming",
+        "git_extensions": [
+            ".awk",
+            ".auk",
+            ".gawk",
+            ".mawk",
+            ".nawk"
+        ]
+    },
+    "TGLANG_LANGUAGE_BASIC": {
+        "git_lang": "BASIC",
+        "git_type": "programming",
+        "git_extensions": [
+            ".bas"
+        ]
+    },
+    "TGLANG_LANGUAGE_BISON": {
+        "git_lang": "Bison",
+        "git_type": "programming",
+        "git_extensions": [
+            ".bison"
+        ]
+    },
+    "TGLANG_LANGUAGE_C": {
+        "git_lang": "C",
+        "git_type": "programming",
+        "git_extensions": [
+            ".c",
+            ".cats",
+            ".h",
+            ".idc"
+        ]
+    },
+    "TGLANG_LANGUAGE_CLOJURE": {
+        "git_lang": "Clojure",
+        "git_type": "programming",
+        "git_extensions": [
+            ".clj",
+            ".bb",
+            ".boot",
+            ".cl2",
+            ".cljc",
+            ".cljs",
+            ".cljs.hl",
+            ".cljscm",
+            ".cljx",
+            ".hic"
+        ]
+    },
+    "TGLANG_LANGUAGE_CMAKE": {
+        "git_lang": "CMake",
+        "git_type": "programming",
+        "git_extensions": [
+            ".cmake",
+            ".cmake.in"
+        ]
+    },
+    "TGLANG_LANGUAGE_COBOL": {
+        "git_lang": "COBOL",
+        "git_type": "programming",
+        "git_extensions": [
+            ".cob",
+            ".cbl",
+            ".ccp",
+            ".cobol",
+            ".cpy"
+        ]
+    },
+    "TGLANG_LANGUAGE_CRYSTAL": {
+        "git_lang": "Crystal",
+        "git_type": "programming",
+        "git_extensions": [
+            ".cr"
+        ]
+    },
+    "TGLANG_LANGUAGE_CSS": {
+        "git_lang": "CSS",
+        "git_type": "markup",
+        "git_extensions": [
+            ".css"
+        ]
+    },
+    "TGLANG_LANGUAGE_CSV": {
+        "git_lang": "CSV",
+        "git_type": "data",
+        "git_extensions": [
+            ".csv"
+        ]
+    },
+    "TGLANG_LANGUAGE_D": {
+        "git_lang": "D",
+        "git_type": "programming",
+        "git_extensions": [
+            ".d",
+            ".di"
+        ]
+    },
+    "TGLANG_LANGUAGE_DART": {
+        "git_lang": "Dart",
+        "git_type": "programming",
+        "git_extensions": [
+            ".dart"
+        ]
+    },
+    "TGLANG_LANGUAGE_ELIXIR": {
+        "git_lang": "Elixir",
+        "git_type": "programming",
+        "git_extensions": [
+            ".ex",
+            ".exs"
+        ]
+    },
+    "TGLANG_LANGUAGE_ELM": {
+        "git_lang": "Elm",
+        "git_type": "programming",
+        "git_extensions": [
+            ".elm"
+        ]
+    },
+    "TGLANG_LANGUAGE_ERLANG": {
+        "git_lang": "Erlang",
+        "git_type": "programming",
+        "git_extensions": [
+            ".erl",
+            ".app",
+            ".app.src",
+            ".es",
+            ".escript",
+            ".hrl",
+            ".xrl",
+            ".yrl"
+        ]
+    },
+    "TGLANG_LANGUAGE_FORTH": {
+        "git_lang": "Forth",
+        "git_type": "programming",
+        "git_extensions": [
+            ".fth",
+            ".4th",
+            ".f",
+            ".for",
+            ".forth",
+            ".fr",
+            ".frt",
+            ".fs"
+        ]
+    },
+    "TGLANG_LANGUAGE_FORTRAN": {
+        "git_lang": "Fortran",
+        "git_type": "programming",
+        "git_extensions": [
+            ".f",
+            ".f77",
+            ".for",
+            ".fpp"
+        ]
+    },
+    "TGLANG_LANGUAGE_GAMS": {
+        "git_lang": "GAMS",
+        "git_type": "programming",
+        "git_extensions": [
+            ".gms"
+        ]
+    },
+    "TGLANG_LANGUAGE_GO": {
+        "git_lang": "Go",
+        "git_type": "programming",
+        "git_extensions": [
+            ".go"
+        ]
+    },
+    "TGLANG_LANGUAGE_GRADLE": {
+        "git_lang": "Gradle",
+        "git_type": "data",
+        "git_extensions": [
+            ".gradle"
+        ]
+    },
+    "TGLANG_LANGUAGE_GRAPHQL": {
+        "git_lang": "GraphQL",
+        "git_type": "data",
+        "git_extensions": [
+            ".graphql",
+            ".gql",
+            ".graphqls"
+        ]
+    },
+    "TGLANG_LANGUAGE_HACK": {
+        "git_lang": "Hack",
+        "git_type": "programming",
+        "git_extensions": [
+            ".hack",
+            ".hh",
+            ".hhi",
+            ".php"
+        ]
+    },
+    "TGLANG_LANGUAGE_HASKELL": {
+        "git_lang": "Haskell",
+        "git_type": "programming",
+        "git_extensions": [
+            ".hs",
+            ".hs-boot",
+            ".hsc"
+        ]
+    },
+    "TGLANG_LANGUAGE_HTML": {
+        "git_lang": "HTML",
+        "git_type": "markup",
+        "git_extensions": [
+            ".html",
+            ".hta",
+            ".htm",
+            ".html.hl",
+            ".inc",
+            ".xht",
+            ".xhtml"
+        ]
+    },
+    "TGLANG_LANGUAGE_IDL": {
+        "git_lang": "IDL",
+        "git_type": "programming",
+        "git_extensions": [
+            ".pro",
+            ".dlm"
+        ]
+    },
+    "TGLANG_LANGUAGE_INI": {
+        "git_lang": "INI",
+        "git_type": "data",
+        "git_extensions": [
+            ".ini",
+            ".cfg",
+            ".cnf",
+            ".dof",
+            ".lektorproject",
+            ".prefs",
+            ".pro",
+            ".properties",
+            ".url"
+        ]
+    },
+    "TGLANG_LANGUAGE_JAVA": {
+        "git_lang": "Java",
+        "git_type": "programming",
+        "git_extensions": [
+            ".java",
+            ".jav",
+            ".jsh"
+        ]
+    },
+    "TGLANG_LANGUAGE_JAVASCRIPT": {
+        "git_lang": "JavaScript",
+        "git_type": "programming",
+        "git_extensions": [
+            ".js",
+            "._js",
+            ".bones",
+            ".cjs",
+            ".es",
+            ".es6",
+            ".frag",
+            ".gs",
+            ".jake",
+            ".javascript",
+            ".jsb",
+            ".jscad",
+            ".jsfl",
+            ".jslib",
+            ".jsm",
+            ".jspre",
+            ".jss",
+            ".jsx",
+            ".mjs",
+            ".njs",
+            ".pac",
+            ".sjs",
+            ".ssjs",
+            ".xsjs",
+            ".xsjslib"
+        ]
+    },
+    "TGLANG_LANGUAGE_JSON": {
+        "git_lang": "JSON",
+        "git_type": "data",
+        "git_extensions": [
+            ".json",
+            ".4DForm",
+            ".4DProject",
+            ".avsc",
+            ".geojson",
+            ".gltf",
+            ".har",
+            ".ice",
+            ".JSON-tmLanguage",
+            ".jsonl",
+            ".mcmeta",
+            ".tfstate",
+            ".tfstate.backup",
+            ".topojson",
+            ".webapp",
+            ".webmanifest",
+            ".yy",
+            ".yyp"
+        ]
+    },
+    "TGLANG_LANGUAGE_JULIA": {
+        "git_lang": "Julia",
+        "git_type": "programming",
+        "git_extensions": [
+            ".jl"
+        ]
+    },
+    "TGLANG_LANGUAGE_KOTLIN": {
+        "git_lang": "Kotlin",
+        "git_type": "programming",
+        "git_extensions": [
+            ".kt",
+            ".ktm",
+            ".kts"
+        ]
+    },
+    "TGLANG_LANGUAGE_LUA": {
+        "git_lang": "Lua",
+        "git_type": "programming",
+        "git_extensions": [
+            ".lua",
+            ".fcgi",
+            ".nse",
+            ".p8",
+            ".pd_lua",
+            ".rbxs",
+            ".rockspec",
+            ".wlua"
+        ]
+    },
+    "TGLANG_LANGUAGE_MAKEFILE": {
+        "git_lang": "Makefile",
+        "git_type": "programming",
+        "git_extensions": [
+            ".mak",
+            ".d",
+            ".make",
+            ".makefile",
+            ".mk",
+            ".mkfile"
+        ]
+    },
+    "TGLANG_LANGUAGE_MARKDOWN": {
+        "git_lang": "Markdown",
+        "git_type": "prose",
+        "git_extensions": [
+            ".md",
+            ".livemd",
+            ".markdown",
+            ".mdown",
+            ".mdwn",
+            ".mkd",
+            ".mkdn",
+            ".mkdown",
+            ".ronn",
+            ".scd",
+            ".workbook"
+        ]
+    },
+    "TGLANG_LANGUAGE_MATLAB": {
+        "git_lang": "MATLAB",
+        "git_type": "programming",
+        "git_extensions": [
+            ".matlab",
+            ".m"
+        ]
+    },
+    "TGLANG_LANGUAGE_NGINX": {
+        "git_lang": "Nginx",
+        "git_type": "data",
+        "git_extensions": [
+            ".nginx",
+            ".nginxconf",
+            ".vhost"
+        ]
+    },
+    "TGLANG_LANGUAGE_NIM": {
+        "git_lang": "Nim",
+        "git_type": "programming",
+        "git_extensions": [
+            ".nim",
+            ".nim.cfg",
+            ".nimble",
+            ".nimrod",
+            ".nims"
+        ]
+    },
+    "TGLANG_LANGUAGE_OCAML": {
+        "git_lang": "OCaml",
+        "git_type": "programming",
+        "git_extensions": [
+            ".ml",
+            ".eliom",
+            ".eliomi",
+            ".ml4",
+            ".mli",
+            ".mll",
+            ".mly"
+        ]
+    },
+    "TGLANG_LANGUAGE_PASCAL": {
+        "git_lang": "Pascal",
+        "git_type": "programming",
+        "git_extensions": [
+            ".pas",
+            ".dfm",
+            ".dpr",
+            ".inc",
+            ".lpr",
+            ".pascal",
+            ".pp"
+        ]
+    },
+    "TGLANG_LANGUAGE_PERL": {
+        "git_lang": "Perl",
+        "git_type": "programming",
+        "git_extensions": [
+            ".pl",
+            ".al",
+            ".cgi",
+            ".fcgi",
+            ".perl",
+            ".ph",
+            ".plx",
+            ".pm",
+            ".psgi",
+            ".t"
+        ]
+    },
+    "TGLANG_LANGUAGE_PHP": {
+        "git_lang": "PHP",
+        "git_type": "programming",
+        "git_extensions": [
+            ".php",
+            ".aw",
+            ".ctp",
+            ".fcgi",
+            ".inc",
+            ".php3",
+            ".php4",
+            ".php5",
+            ".phps",
+            ".phpt"
+        ]
+    },
+    "TGLANG_LANGUAGE_POWERSHELL": {
+        "git_lang": "PowerShell",
+        "git_type": "programming",
+        "git_extensions": [
+            ".ps1",
+            ".psd1",
+            ".psm1"
+        ]
+    },
+    "TGLANG_LANGUAGE_PROLOG": {
+        "git_lang": "Prolog",
+        "git_type": "programming",
+        "git_extensions": [
+            ".pl",
+            ".plt",
+            ".pro",
+            ".prolog",
+            ".yap"
+        ]
+    },
+    "TGLANG_LANGUAGE_PYTHON": {
+        "git_lang": "Python",
+        "git_type": "programming",
+        "git_extensions": [
+            ".py",
+            ".cgi",
+            ".fcgi",
+            ".gyp",
+            ".gypi",
+            ".lmi",
+            ".py3",
+            ".pyde",
+            ".pyi",
+            ".pyp",
+            ".pyt",
+            ".pyw",
+            ".rpy",
+            ".spec",
+            ".tac",
+            ".wsgi",
+            ".xpy"
+        ]
+    },
+    "TGLANG_LANGUAGE_QML": {
+        "git_lang": "QML",
+        "git_type": "programming",
+        "git_extensions": [
+            ".qml",
+            ".qbs"
+        ]
+    },
+    "TGLANG_LANGUAGE_R": {
+        "git_lang": "R",
+        "git_type": "programming",
+        "git_extensions": [
+            ".r",
+            ".rd",
+            ".rsx"
+        ]
+    },
+    "TGLANG_LANGUAGE_RAKU": {
+        "git_lang": "Raku",
+        "git_type": "programming",
+        "git_extensions": [
+            ".6pl",
+            ".6pm",
+            ".nqp",
+            ".p6",
+            ".p6l",
+            ".p6m",
+            ".pl",
+            ".pl6",
+            ".pm",
+            ".pm6",
+            ".raku",
+            ".rakumod",
+            ".t"
+        ]
+    },
+    "TGLANG_LANGUAGE_RUBY": {
+        "git_lang": "Ruby",
+        "git_type": "programming",
+        "git_extensions": [
+            ".rb",
+            ".builder",
+            ".eye",
+            ".fcgi",
+            ".gemspec",
+            ".god",
+            ".jbuilder",
+            ".mspec",
+            ".pluginspec",
+            ".podspec",
+            ".prawn",
+            ".rabl",
+            ".rake",
+            ".rbi",
+            ".rbuild",
+            ".rbw",
+            ".rbx",
+            ".ru",
+            ".ruby",
+            ".spec",
+            ".thor",
+            ".watchr"
+        ]
+    },
+    "TGLANG_LANGUAGE_RUST": {
+        "git_lang": "Rust",
+        "git_type": "programming",
+        "git_extensions": [
+            ".rs",
+            ".rs.in"
+        ]
+    },
+    "TGLANG_LANGUAGE_SAS": {
+        "git_lang": "SAS",
+        "git_type": "programming",
+        "git_extensions": [
+            ".sas"
+        ]
+    },
+    "TGLANG_LANGUAGE_SCALA": {
+        "git_lang": "Scala",
+        "git_type": "programming",
+        "git_extensions": [
+            ".scala",
+            ".kojo",
+            ".sbt",
+            ".sc"
+        ]
+    },
+    "TGLANG_LANGUAGE_SCHEME": {
+        "git_lang": "Scheme",
+        "git_type": "programming",
+        "git_extensions": [
+            ".scm",
+            ".sch",
+            ".sld",
+            ".sls",
+            ".sps",
+            ".ss"
+        ]
+    },
+    "TGLANG_LANGUAGE_SHELL": {
+        "git_lang": "Shell",
+        "git_type": "programming",
+        "git_extensions": [
+            ".sh",
+            ".bash",
+            ".bats",
+            ".cgi",
+            ".command",
+            ".fcgi",
+            ".ksh",
+            ".sh.in",
+            ".tmux",
+            ".tool",
+            ".trigger",
+            ".zsh",
+            ".zsh-theme"
+        ]
+    },
+    "TGLANG_LANGUAGE_SMALLTALK": {
+        "git_lang": "Smalltalk",
+        "git_type": "programming",
+        "git_extensions": [
+            ".st",
+            ".cs"
+        ]
+    },
+    "TGLANG_LANGUAGE_SOLIDITY": {
+        "git_lang": "Solidity",
+        "git_type": "programming",
+        "git_extensions": [
+            ".sol"
+        ]
+    },
+    "TGLANG_LANGUAGE_SQL": {
+        "git_lang": "SQL",
+        "git_type": "data",
+        "git_extensions": [
+            ".sql",
+            ".cql",
+            ".ddl",
+            ".inc",
+            ".mysql",
+            ".prc",
+            ".tab",
+            ".udf",
+            ".viw"
+        ]
+    },
+    "TGLANG_LANGUAGE_SWIFT": {
+        "git_lang": "Swift",
+        "git_type": "programming",
+        "git_extensions": [
+            ".swift"
+        ]
+    },
+    "TGLANG_LANGUAGE_TCL": {
+        "git_lang": "Tcl",
+        "git_type": "programming",
+        "git_extensions": [
+            ".tcl",
+            ".adp",
+            ".sdc",
+            ".tcl.in",
+            ".tm",
+            ".xdc"
+        ]
+    },
+    "TGLANG_LANGUAGE_TEXTILE": {
+        "git_lang": "Textile",
+        "git_type": "prose",
+        "git_extensions": [
+            ".textile"
+        ]
+    },
+    "TGLANG_LANGUAGE_TYPESCRIPT": {
+        "git_lang": "TypeScript",
+        "git_type": "programming",
+        "git_extensions": [
+            ".ts",
+            ".cts",
+            ".mts"
+        ]
+    },
+    "TGLANG_LANGUAGE_UNREALSCRIPT": {
+        "git_lang": "UnrealScript",
+        "git_type": "programming",
+        "git_extensions": [
+            ".uc"
+        ]
+    },
+    "TGLANG_LANGUAGE_VALA": {
+        "git_lang": "Vala",
+        "git_type": "programming",
+        "git_extensions": [
+            ".vala",
+            ".vapi"
+        ]
+    },
+    "TGLANG_LANGUAGE_VBSCRIPT": {
+        "git_lang": "VBScript",
+        "git_type": "programming",
+        "git_extensions": [
+            ".vbs"
+        ]
+    },
+    "TGLANG_LANGUAGE_VERILOG": {
+        "git_lang": "Verilog",
+        "git_type": "programming",
+        "git_extensions": [
+            ".v",
+            ".veo"
+        ]
+    },
+    "TGLANG_LANGUAGE_XML": {
+        "git_lang": "XML",
+        "git_type": "data",
+        "git_extensions": [
+            ".xml",
+            ".adml",
+            ".admx",
+            ".ant",
+            ".axaml",
+            ".axml",
+            ".builds",
+            ".ccproj",
+            ".ccxml",
+            ".clixml",
+            ".cproject",
+            ".cscfg",
+            ".csdef",
+            ".csl",
+            ".csproj",
+            ".ct",
+            ".depproj",
+            ".dita",
+            ".ditamap",
+            ".ditaval",
+            ".dll.config",
+            ".dotsettings",
+            ".filters",
+            ".fsproj",
+            ".fxml",
+            ".glade",
+            ".gml",
+            ".gmx",
+            ".grxml",
+            ".gst",
+            ".hzp",
+            ".iml",
+            ".ivy",
+            ".jelly",
+            ".jsproj",
+            ".kml",
+            ".launch",
+            ".mdpolicy",
+            ".mjml",
+            ".mm",
+            ".mod",
+            ".mxml",
+            ".natvis",
+            ".ncl",
+            ".ndproj",
+            ".nproj",
+            ".nuspec",
+            ".odd",
+            ".osm",
+            ".pkgproj",
+            ".pluginspec",
+            ".proj",
+            ".props",
+            ".ps1xml",
+            ".psc1",
+            ".pt",
+            ".qhelp",
+            ".rdf",
+            ".res",
+            ".resx",
+            ".rs",
+            ".rss",
+            ".sch",
+            ".scxml",
+            ".sfproj",
+            ".shproj",
+            ".srdf",
+            ".storyboard",
+            ".sublime-snippet",
+            ".sw",
+            ".targets",
+            ".tml",
+            ".ts",
+            ".tsx",
+            ".typ",
+            ".ui",
+            ".urdf",
+            ".ux",
+            ".vbproj",
+            ".vcxproj",
+            ".vsixmanifest",
+            ".vssettings",
+            ".vstemplate",
+            ".vxml",
+            ".wixproj",
+            ".workflow",
+            ".wsdl",
+            ".wsf",
+            ".wxi",
+            ".wxl",
+            ".wxs",
+            ".x3d",
+            ".xacro",
+            ".xaml",
+            ".xib",
+            ".xlf",
+            ".xliff",
+            ".xmi",
+            ".xml.dist",
+            ".xmp",
+            ".xproj",
+            ".xsd",
+            ".xspec",
+            ".xul",
+            ".zcml"
+        ]
+    },
+    "TGLANG_LANGUAGE_YAML": {
+        "git_lang": "YAML",
+        "git_type": "data",
+        "git_extensions": [
+            ".yml",
+            ".mir",
+            ".reek",
+            ".rviz",
+            ".sublime-syntax",
+            ".syntax",
+            ".yaml",
+            ".yaml-tmlanguage",
+            ".yaml.sed",
+            ".yml.mysql"
+        ]
+    }
+}
