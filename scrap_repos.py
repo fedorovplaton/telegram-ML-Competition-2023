@@ -54,10 +54,13 @@ def get_repositories_with_lang(
                 if repo_info.get("private", True) or repo_info.get("fork", True):
                     continue
                 url = repo_info["url"]
-                main_branch = requests.get(
-                    f"{url}/branches",
-                    headers=HEADERS
-                ).json()[0]["name"]
+                try:
+                    main_branch = requests.get(
+                        f"{url}/branches",
+                        headers=HEADERS
+                    ).json()[0]["name"]
+                except:
+                    continue
                 tree = requests.get(
                     f"{url}/git/trees/{main_branch}?recursive=1",
                     headers=HEADERS
