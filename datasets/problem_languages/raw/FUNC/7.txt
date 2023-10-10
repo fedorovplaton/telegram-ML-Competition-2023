@@ -1,0 +1,20 @@
+(slice, slice, slice, int, cell) load_data() inline {
+  var ds = get_data().begin_parse();
+  return
+	(ds~load_msg_addr(), ;; marketplace_address
+	  ds~load_msg_addr(), ;; nft_address
+	  ds~load_msg_addr(),  ;; nft_owner_address
+	  ds~load_coins(), ;; full_price
+	  ds~load_ref() ;; fees_cell
+	 );
+}
+
+() save_data(slice marketplace_address, slice nft_address, slice nft_owner_address, int full_price, cell fees_cell) impure inline {
+  set_data(begin_cell()
+	.store_slice(marketplace_address)
+	.store_slice(nft_address)
+	.store_slice(nft_owner_address)
+	.store_coins(full_price)
+	.store_ref(fees_cell)
+	.end_cell());
+}

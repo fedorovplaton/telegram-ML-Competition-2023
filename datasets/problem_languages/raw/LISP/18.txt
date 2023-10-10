@@ -1,0 +1,17 @@
+
+; catch and throw work a little differently than in
+;    most languages:
+;
+; catch defines a block during which a throw may occur,
+;    rather like a try block in other languages
+;
+; while throw identifies which block it is exiting,
+;    and what value to return
+;
+; (this is essentially a re-branding of blocks and return-from)
+
+(catch 'example ; example being the name of our block
+    (... do whatever ...)
+    (if (somecondition)
+       (throw 'example "nooooo.....")) ; exit the example block, returning "nooooo...."
+    (... do more stuff ...))

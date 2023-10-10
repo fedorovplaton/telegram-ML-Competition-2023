@@ -1,0 +1,64 @@
+NEWTURTLE "myrtle
+
+TO start
+  ;this is a very simple yet addicting and frustrating game
+  ;add in your own sound effects!
+
+  reset
+  setmodel [bk 7.5 stamp "myrtle]
+  ;myrtle's position is usually her tail, so we need to move her a bit
+  ;so that her position is center-ish of her shell
+
+  startbale "balls 11
+  pu
+  setxy -170 0
+  rt 90
+  forever [
+    if keyp [
+      make "key lowercase readchar
+      if :key = "k [sr 10]
+      if :key = "i [sl 10]
+      if :key = "j [bk 10]
+      if :key = "l [fd 10]
+    ]
+    ;pressing keys causes turtle to move
+
+    if nearp 15 [pr "ouch! repeat 1000 [rt 1] finish]
+    ;got hit by a ball
+
+    if xpos > 180 [pr "win! finish]
+    ;made it to the other side!
+  ]
+END
+
+ON start flag queue []
+  start
+END
+
+
+NEWTURTLE "snappy
+
+
+NEWTURTLE "libby
+
+
+NEWBALE "balls
+
+TO init
+  setmodel {"setfc baleindex "ico 10}
+  st
+  penup
+  setxy -160 + baleindex * 30 100
+  output {"dir 1 "speed 1 + (0.1 * random (5 * (5 + baleindex)))}
+
+END
+
+TO main
+  if :dir = 0 [bk :speed] [fd :speed]
+
+  slideleft 0.1
+  ;the balls gradually move toward the left side
+  ;of the screen to discourage procrastination!
+
+  if ypos < -100 [make "dir 1]
+  if ypos > 100 [make "dir 0]

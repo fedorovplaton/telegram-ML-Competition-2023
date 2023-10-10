@@ -1,0 +1,24 @@
+TO voxelcrater
+  reset hideturtle
+  setterrainresolution 5
+  setterrain [-2 -2 2 2] [20 1 10] random 500 [fbm 2] "voxel
+  stop
+  dropanchor penup pullout 50
+  repeat 10 [
+    repeat 180 [
+      orbitright 2
+      setelevation {xpos ypos 40 + 5 * repabove 1}
+    ]
+    pullout 2
+  ]
+
+  pullout 2
+
+  repeat 9 [
+    repeat 180 [
+      orbitright 2
+      setelevation {xpos ypos 95 - 5 * repabove 1}
+    ]
+    pullout 2
+  ]
+END

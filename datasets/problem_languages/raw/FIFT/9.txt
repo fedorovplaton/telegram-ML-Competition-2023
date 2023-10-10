@@ -1,0 +1,31 @@
+{ hole dup 1 { @ execute } does create 1 ’ ! does create } : vector-set
+vector-set sort :sort
+vector-set merge :merge
+vector-set less :less
+{ null null rot
+  { dup null? not }
+  { uncons swap rot cons -rot } while drop
+} : split
+{ dup null? { drop } {
+    over null? { nip } {
+      over car over car less ’ swa'p if
+      uncons rot merge cons
+    } cond
+  } cond
+} :merge
+{ dup null? {
+    dup cdr null? {
+      split sort swap sort merge
+    } ifnot
+  } ifnot
+} :sort
+forget :merge
+forget :sort
+// set ‘less‘ to compare numbers, sort a list of numbers
+’ < :less
+3 1 4 1 5 9 2 6 5 9 list
+dup .l cr sort .l cr
+// set ‘less‘ to compare strings, sort a list of strings
+{ $cmp 0< } :less
+"once" "upon" "a" "time" "there" "lived" "a" "kitten" 8 list
+dup .l cr sort .l cr

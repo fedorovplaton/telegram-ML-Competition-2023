@@ -1,0 +1,4 @@
+group(mygroup)                   c context only
+'a' > 'b'
+group(mygroup) using keys        c context and keystroke
+'a' + 'a' > 'c'

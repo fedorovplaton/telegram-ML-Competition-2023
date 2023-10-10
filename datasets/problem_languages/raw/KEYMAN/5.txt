@@ -1,0 +1,1 @@
++ [RALT K_A] > "You pressed AltGr+A"

@@ -1,0 +1,3 @@
+"Asm.fif" include
+<{ s1 s2 XCHG OVER }>s
+csr.

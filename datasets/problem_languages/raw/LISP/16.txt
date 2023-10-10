@@ -1,0 +1,30 @@
+#! /usr/bin/gcl -f
+
+; function to print a vectors length and contents
+(defun prtVec (vec)
+   (cond
+      ((not (vectorp vec)) (format t "Not a vector ~A~%" vec))
+      (t (block
+            "print vec info"
+            (format t "the vector dimensions are ~A~%" (array-dimensions vec))
+            (format t "the vector contents are ~A~%" vec)
+         )
+      )
+   )
+)
+
+; create a length 5 vector out of a list of values
+(setf myVec (vector 3 12 "foo" '(1 2) 6.5))
+
+; set element [1] to -1
+(setf (svref myVec 1) -1)
+
+; set element [0] to 1
+(setf (svref myVec 0) 1)
+
+; pass the vector to prtVec for display
+(prtVec myVec)
+
+; function to build a vector from a list:
+(defun list2vec (L)
+   (if (listp L) (apply 'vector L)))

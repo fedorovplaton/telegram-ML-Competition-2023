@@ -1,0 +1,334 @@
+NEWTURTLE "myrtle
+
+TO game
+  ;invasion is a simple space invaders clone with a 3D twist
+
+  reset
+  release
+  ;reset the workspace and release the non-standard turtles (ufos)
+
+  stars:drawstars
+  ;draw a starfield using the stars turtle
+
+  nokeyclick
+  ;don't click keys
+
+  noaudiowait
+  ;don't pause on audio playback
+
+  snappy:newworker [
+    pullout 100
+    forever [
+      repeat 45 [orbitleft 1 wait 5]
+      repeat 90 [orbitright 1 wait 5]
+      repeat 45 [orbitleft 1 wait 5]
+      repeat 45 [orbitup 1 wait 5]
+      repeat 90 [orbitdown 1 wait 5]
+      repeat 45 [orbitup 1 wait 5]
+    ]
+  ]
+  ;create a new 'worker' to move the camera around the scene
+  ;independently of other activity
+
+  make "fleet []
+  share "fleet
+  ;the fleet container holds the list of UFO turtle names
+  ;it needs to be shared so all the UFO turtles can edit it
+
+  make "score 0
+  share "score
+  ;the score cotnainer holds the score, the number of UFOs destroyed
+  ;the UFOs themselves increment the score, and so it must be shared
+
+  repeat 3 [
+    repeat 5 [
+      newtu word repcount repabove 1
+      ;create a new turtle with the name column + row
+      ;note: newtu is NOT the same as newturtle, newturtle is a
+      ;declaration used in the workspace file (this), while newtu
+      ;creates a new turtle during execution and selects it
+      ;(we should change its name to instatiate?)
+
+      noaudiowait
+
+      makemodel
+      ;create its UFO model
+
+      queue turtle "fleet
+      ;add the turtle name to the fleet container
+
+      make "shootcount 0
+      ;reset its shootcounter to 0
+
+      penup
+      ;don't draw anything!
+
+      setposition {-225 + repcount * 75 -25 + (repabove 1) * 50}
+      ;set its position based on its row and column number
+      ;curly braces indicate a 'soft list', a list that is evaluated
+      ;at runtime. repabove gets the loop count of the repeat enclosing
+      ;the current repeat
+
+      showturtle
+      ;show the UFO
+    ]
+  ]
+  ;create three rows of 5 UFOs each
+
+  setturtle myrtle
+  ;reselect myrtle
+
+  setmodel "spaceship
+  ;change myrtle's model to the built-in spaceship model
+
+  setmodelscale 2
+  ;set the model's scale (size) to a factor of 2
+
+  penup back 150
+  ;position Myrtle
+
+  newworker [
+    forever [
+      movefleet
+      ;run the movefleet procedure
+
+      toot 200 + random 1000 2
+      ;make a random beep
+
+      wait 10
+    ]
+  ]
+  ;create a new 'worker' to move the UFOs 'forever'
+
+  make "delay 0
+  ;stores the delay between player shots
+
+  forever [
+    if :delay > 0 [dec "delay]
+    ;decrease the delay value by one, if it is above zero
+
+    if keyp [
+      ;if a key has been pressed:
+
+      make "key uppercase readchar
+      ;store the uppercase value of the key in the key container
+
+      switch "key
+      ;use the value of the key value for the following case comparisons:
+
+      case "J [repeat 10 [repeat 10 [sl .1]]]
+      case "K [repeat 10 [repeat 10 [sr .1]]]
+      case "I [repeat 10 [repeat 10 [ra .1]]]
+      case "M [repeat 10 [repeat 10 [lo .1]]]
+      ;move Myrtle as required
+
+      case "A [
+        ;should I shoot?
+        if :delay = 0 [
+          ;yes, I should shoot!
+
+          ;we're going to 'hatch' a missile BUT if we just
+          ;do that, our detection routine will think we've been shot.
+          ;to work around this, we're going to stop rendering our
+          ;spaceship while we launch our missile from a position
+          ;slghtly forward of our current position.
+
+          notrackrender
+          ;don't render this turtle's graphics
+
+          forward 31
+          updatestate
+          ;update the state of the turtle. This is usually done while
+          ;rendering, so we need to do this manually while rendering is
+          ;off
+
+          hatch [
+            showturtle
+            repeat 300 [fd 1]
+          ]
+          ;hatch our 'missile', which goes forward 300 steps and then 'dies'
+
+          back 31
+          ;move back to where we were before
+
+          trackrender
+          ;turn track rendering back on
+
+          playsound "pew
+          ;play a 'pew' sound
+
+          make "delay 20
+          ;set the delay container to 20, which causes us to have to wait
+          ;before firing again
+        ]
+      ]
+    ]
+
+    if nearp 30 [
+      ;check to see if we've been hit. If we have:
+
+      playsound "explosion
+      hideturtle
+      print |Boom! Game over!|
+      repeat 50 [
+        randomfillcolor
+        icosphere repcount
+        wait 1
+      ]
+      ;explosion animation
+
+      clean finish
+      ;finish stops all execution
+    ]
+
+    wait 1
+    ;wait 1/60ths of a second between loops
+  ]
+  ;do it again
+
+END
+
+TO movefleet
+  ;this procedure moves the UFOs
+
+  if :fleet = emptylist [
+    ;if there are no UFOs left:
+    print |Great work!|
+    playsound "applause
+    wait 120
+    finish
+  ]
+
+  foreach "ufo :fleet [
+    ;for each of the UFOs remaining:
+
+    setturtle :ufo
+    ;select the ufo turtle
+
+    rollright 10
+    ;roll right 10 degrees
+
+    if 1 = last :ufo [slideright 5]
+    if 1 = first :ufo [lower 5]
+    if 2 = last :ufo [slideleft 5]
+    if 2 = first :ufo [raise 5]
+    if 3 = last :ufo [slideright 5]
+    if 3 = first :ufo [lower 5]
+    ;do a merry dance
+
+    if :shootcount > 0 [dec "shootcount]
+    if and 1 = random 20 :shootcount = 0 [
+      make "shootcount 20
+      hatch [
+        right 180 showturtle
+        repeat 300 [fd 1 rr 1]
+      ]
+    ]
+    ;fire!
+
+    foreach "i near position 50 [
+      if "m = second :i [ht
+        newworker [repeat 50 [ico repcount wait 1] clean]
+        ;boom
+
+        make "fleet without turtle :fleet
+        ;remove ufo turtle from fleet list
+
+        inc "score (print |Score:| :score)
+        ;increase the score and tell the user
+
+        playsound "explosion
+        ;play an 'explosion' sound
+
+        myrtle:try [halt hatchlingworker :i] []
+        ;stop the missle that shot me (if it still exists)
+
+      ]
+    ]
+    ;you got me!
+  ]
+
+  tu myrtle
+  ;reselect Myrtle
+END
+
+NEWTURTLE "snappy
+
+
+NEWTURTLE "libby
+
+TO makemodel
+  ;make the UFO model for the calling turtle
+
+  begintag turtle
+  makeufo
+  endtag
+  newmodel word "ufo turtle turtle
+
+  clearscreen
+  ;this applies only to the calling turtle
+
+  setmodel word "ufo turtle
+END
+
+TO makeufo
+  ;create the UFO itself
+
+  penup
+  randomfillcolor
+
+  make "sides 3 + random 6
+  down 90
+  rollright 180
+
+  torus 10 25 3 :sides
+  ;make the outer ring
+
+  switch {fc}
+  case 1 [setfc 9]
+  case 2 [setfc 7]
+  case 3 [setfc 11]
+  case 4 [setfc 12]
+  case 5 [setfc 10]
+  case 6 [setfc 2]
+  case 7 [setfc 6]
+  case 8 [setfc 13]
+  case 9 [setfc 1]
+  case 10 [setfc 15]
+  case 11 [setfc 3]
+  case 12 [setfc 14]
+  case 13 [setfc 8]
+  case 14 [setfc 12]
+  case 15 [setfc 5]
+  ; select a complementary fill color
+
+  dome 25 3 :sides
+  ;make the top dome
+
+  polyspot 25 :sides
+  ;make the bottom spot
+
+END
+
+NEWTURTLE "stars
+
+TO drawstars
+  ;draw the starfield
+  penup
+
+  repeat 100 [
+    ;do 100 times:
+    home
+    ;go home
+
+    randomvectors
+    ;pick a random vector orientation
+
+    forward 1000 + random 1000
+    up 90
+    randomfillcolor
+    spot 5 + random 10
+    ;create a randomly colored 'star'
+  ]
+
+END

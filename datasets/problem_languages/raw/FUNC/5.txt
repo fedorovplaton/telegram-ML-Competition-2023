@@ -1,0 +1,15 @@
+if (op == 1) { ;; deploy new auction
+	  int amount = in_msg_body~load_coins();
+	  (cell state_init, cell body) = (cs~load_ref(), cs~load_ref());
+	  int state_init_hash = cell_hash(state_init);
+	  slice dest_address = begin_cell().store_int(0, 8).store_uint(state_init_hash, 256).end_cell().begin_parse();
+
+	  var msg = begin_cell()
+		.store_uint(0x18, 6)
+		.store_uint(4, 3).store_slice(dest_address)
+		.store_grams(amount)
+		.store_uint(4 + 2 + 1, 1 + 4 + 4 + 64 + 32 + 1 + 1 + 1)
+		.store_ref(state_init)
+		.store_ref(body);
+	  send_raw_message(msg.end_cell(), 1); ;; paying fees, revert on errors
+	}

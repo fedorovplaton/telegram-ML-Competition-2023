@@ -1,0 +1,6 @@
+variable x-box
+{ x-box @ } : x
+{ x-box ! } : x!
+{ x x * 5 x * + 6 + } : f(x)
+{ ."( " x . .", " f(x) . .") " } : .xy
+3 x! .xy 5 x! .xy

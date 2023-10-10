@@ -1,0 +1,177 @@
+NEWTURTLE "pipemaker
+
+TO pipes
+  ;the pipemaker turtle's job is to
+  ;create the pipes, shift them to the left
+  ;and check if they've hit the turtle
+
+  clearscreen
+  noaudiowait
+  penup
+  home
+  slideright 250
+  back 120
+  up 90
+  ;position the turtle appropriately for
+  ;creating the pipes offscreen to the right
+
+  begintag "move
+  endtag
+  ;this tag is used to shift the pipes,
+  ;by replacing its contents with an ever-
+  ;increasing slideleft directive
+
+  make "height 100
+  ;this is the starting height of the pipes
+
+  make "heights [0 0 0 0 0]
+  ;initialize an 'zeroes' list of pipe heights
+
+  make "score 0
+  make "count 0
+  ;initialize the score and the pipe count
+
+  settypesize 20
+  ;set the type size. Type is the text you
+  ;create inside the 3D world
+
+  forever [
+    ;do this forever:
+
+    sleep [50]
+    ;try to do this stuff in an average of
+    ;50ms -- less or more as needed to keep
+    ;that average:
+
+    if divisorp 20 loopcount [
+      ;every 20 loops:
+
+      inc "count
+      ;increase the contents of the :count container
+      ;by one
+
+      if loopcount > 60 [
+        ;if the loopcount is greater than 60:
+        playsound "clang
+        inc "score
+        say :score
+        ;make a sound, increment :score and say it
+      ]
+
+      slideright 100
+
+      begintag loopcount
+      ;create a new 'tag' for the pipe
+      ;so we can remove it after it passes the
+      ;left side of the screen
+
+      randomfillshade
+      ;select a random fill shade
+
+      make "col 1 + random 5
+      ;select a random number and put it in :col
+
+      setfillcolor item :col [12 9 7 6 11 14 10 13]
+      ;set that color based on :col's index in the
+      ;provided list
+
+      make "height :height + (-60 + random 120)
+      ;increase or decrease :height based on a
+      ;random number
+
+      if :height < 20 [make "height 30 + random 20] if :height > 120 [make "height 110 - random 20]
+      ;if too high or low, pick a new value higher
+      ;or lower as needed
+
+      queue :height "heights
+      ;add the new height to the list of heights
+
+      ;create the lower pipe:
+      cylinder 20 :height 50
+      lower :height
+      setfillcolor item :col [4 8 6 2 1 12 5 3]
+      ;select the complementary color for the pipe
+
+      cylinder 25 20 50
+      lower 50
+
+      ;type the pipe number:
+      down 90 right 90 back 10
+      if :count > 9 [bk 10]
+      inscribe :count
+      if :count > 9 [fd 10]
+      forward 10 left 90 up 90
+      ;if gameplay is too slow, comment out
+      ;the above five lines
+
+      ;create the upper pipe:
+      lower 50
+      ;remember, the turtle is upside down!
+      cylinder 25 20 50
+      lower 20
+      setfillcolor item :col [12 9 7 6 11 14 10 13]
+      cylinder 20 120 - ypos 50
+      raise :height + 120
+
+      endtag
+      ;close the pipe 'tag'
+
+      if loopcount > 119 [erasetag loopcount - 100]
+      ;erase the pipe that has left the screen
+
+      ignore pop "heights
+      ;remove its height from the :heights container
+      ;and just throw it away (ignore it)
+    ]
+
+    if loopcount > 60 [
+      ;check for crash:
+      if (or
+        myrtle:ypos > (-120 + (90 + item 3 :heights))
+        myrtle:ypos < (-120 + (20 + item 3 :heights))
+        ;the third item in the :heights list is the
+        ;height of the pipe around where the turtle
+        ;is, so we can use that to see if we've hit
+        ;anything
+      ) [
+        (print |Crash! Final Score: | :score)
+        print |Press flag icon to play again!|
+
+        calm "myrtle
+        myrtle:run [setfillcolor 1 icosphere 30]
+        ;red ball
+
+        audiowait
+        playsound "crack
+        playsound "aw
+
+        myrtle:clean
+        ;gets rid of the red ball
+
+        noaudiowait
+        playsound "fall
+        say |too bad|
+
+        myrtle:repeat 90 [
+          forward 3 lower 3 wait 1
+        ]
+        ;fall to the ground
+
+        audiowait
+        playsound "crash
+        finish
+        ;that's all folks
+
+      ]
+    ]
+
+    replacetag "move [slideleft loopcount * 5]
+    ;increase the value of the slideleft
+    ;command in the move tag, shifting the
+    ;pipes to the left
+
+  ]
+
+  ;and that's it! Not really much code, is it?
+
+END

@@ -1,0 +1,42 @@
+left 2
+  raise 37
+  down 42
+  right 30
+  lo 85
+  setfillcolor 13
+  setpencolor 8
+  setspheroidaxis true domoid 15 10 3 0.5
+  ;eye
+
+  ra 85
+  lt 30
+  UP 42
+  RT 40
+  DN 42
+  RT 30
+  lo 85
+  domoid 15 10 3 0.5
+  ;other eye
+
+  ra 85
+  LT 30 UP 42 LT 20 DN 50 RT 30 lo 85
+  domoid 10 10 3 0.5
+  ;nose
+
+  ra 85
+  LT 30 lo 3 DN 48 FD 40 lo 60
+  domoid 17 10 10 0.5
+  ;mouth
+
+  popturtle
+  ;return the turtle to its position, orientation
+  ;and so forth when we did pushturtle
+  nogradient
+  setfc 8
+  ;setfillcolor
+  cylinder 8 60 10 lo 60
+  up 90 rt 180 sr 20 lt 72.5
+  ;sr = slideright
+  cylinderarc 8 20 10 10 3
+  home ht
+END

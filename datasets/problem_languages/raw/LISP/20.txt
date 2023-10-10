@@ -1,0 +1,13 @@
+
+; unwind-protect allows the execution of a sequence of statements,
+;    but executes all statements even if an earlier statement is
+;    interrupted (unlike the behaviour of regular blocks)
+; e.g.
+;    (unwind-protect
+;       (stmt1)
+;       (stmt2)
+;       (stmt3))
+;
+; this is typically used when there is some form of clean-up
+;    action we want to perform even if something else in
+;    the loop fails (e.g. closing files, pipes, etc)

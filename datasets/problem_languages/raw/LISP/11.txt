@@ -1,0 +1,6 @@
+(automaton init
+    (init : (c -> more))
+    (more : (a -> more)
+            (d -> more)
+            (r -> end))
+    (end  : (r -> end)))

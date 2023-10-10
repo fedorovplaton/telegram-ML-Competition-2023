@@ -1,0 +1,58 @@
+TO arcflower3d
+  cs
+  ;clearscreen
+
+  ;maximize
+  ;the above line forces full-screen display. This is needed
+  ;with savewebm, because the video capture routine uses the
+  ;webgl canvas, and so whatever resolution it displays at
+  ;is the resolution the video file will be. Uncomment it if
+  ;saving video
+
+  ht
+  ;hideturtle
+
+  setpw 2
+  ;setpenwidth
+
+  ;savewebm 260
+  ;uncomment the above line to record video
+
+  repeat 3600 [
+    norender
+    ;suspend rendering graphical output
+
+    cs
+
+    repeat 128 [
+      setpc 1 + remainder repcount 15
+      ;set the pencolor to the remainder of a modulus
+      ;of the current loop count (repcount)
+
+      pu
+      ;penup
+
+      rarc 0.1 * repabove 1 repcount
+      ;move in an arc trajectory to the right
+      ;based on the current repcount and the
+      ;repcount of the loop above (repabove)
+
+      rr 0.1
+      ;rollright
+
+      dn 0.1
+      ;down
+
+      arc 90 repcount
+      ;create a 90 degree arc based on the current
+      ;repcount
+    ]
+
+    render
+    ;resume rendering
+
+    nextframe
+    ;wait until one frame is rendered
+  ]
+
+END

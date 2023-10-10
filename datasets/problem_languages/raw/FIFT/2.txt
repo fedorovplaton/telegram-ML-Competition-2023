@@ -1,0 +1,6 @@
+variable x variable y
+{ dup x ! dup * y ! } : setxy
+3 setxy x @ . y @ . x @ y @ + .
+7 setxy x @ . y @ . x @ y @ + .
+{ ."( " x @ . .", " y @ . .") " } : showxy
+3 setxy showxy

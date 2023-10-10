@@ -1,0 +1,22 @@
+TO pumpkin
+  pu
+  ;penup
+
+  rr 180 up 90 lt 18 ra 20
+  ;these were added after in order to position
+  ;the pumpkin to face the camera
+
+  pushturtle
+  ;stores the turtle's state on to a stack,
+  ;to be restored later using popturtle
+
+  setspheroidaxis false
+  setfillcolor orange
+  setpencolor brown
+
+  gradient
+  repeat 10 [
+    setfillshade 0
+    spheroidslice 50 10 40 18 23 1.5
+    rt 36
+  ]

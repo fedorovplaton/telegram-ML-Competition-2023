@@ -1,0 +1,62 @@
+
+; create a hash table to store key/value pairs
+(setf myT (make-hash-table))
+
+; By default the hash tables use (eql ... ...) to compare keys,
+; which won't give the desired behaviour if the keys are strings.
+; You can change this as shown below:
+(setf myTstrings (make-hash-table :test 'equal))
+
+; assign a key-value pair with key 16 and value "blah"
+(setf (gethash 16 myT) "blah")
+
+; assign a key-value pair with key "secret" and value 123
+(setf (gethash "secret" myT) 123)
+
+; lookup the value associated with key 16
+(gethash 16 myT)
+
+; change key 16's value to '(1 2 3)
+(setf (gethash 16 myT) '(1 2 3))
+
+; remove the key/value pair for "secret"
+(remhash "secret" myT)
+
+; get the size of the table
+(hash-table-count myT)
+
+; checking if a key exists
+;    gethash actually returns a second value, specifying if it
+;    found a key or not (t if it did, nil otherwise)
+; we can check that second return value with nth-value
+(if (nth-value 1 (gethash "foo" myT))
+    (format t "key is ~A~%" (gethash "foo" myT))
+    (format t "table does not contain ~A~%" "foo"))
+
+; iterate through the key/value pairs
+(loop for ID being the hash-keys of myT
+   do (format t "~A:~A~%" ID (gethash ID myT)))
+
+; use a loop to get a list of keys in a hash table
+(defun getKeys (H)
+   (loop for key being the hash-keys of H collect key))
+
+; use a loop to get a list of values in a hash table
+(defun getValues (H)
+   (loop for key being the hash-keys of H collect (gethash key H)))
+
+; use a loop to get a list of key-value pairs in a hash table
+(defun getPairs (H)
+   (loop for key being the hash-keys of H collect (list key (gethash key H))))
+
+; apply a function f to all key-value pairs in the hash
+; (assuming f expects two parameters of suitable types)
+(maphash 'f myT)
+
+; example: printing all the key/value pairs using a function and maphash
+(defun prtKVPair (K V)
+   (format t "key: ~A ; value: ~A~%" K V))
+(maphash 'prtKVPair H)
+
+; check if something is a hashtable
+(hash-table-p H)

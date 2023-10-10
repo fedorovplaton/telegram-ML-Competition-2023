@@ -1,0 +1,179 @@
+SETABOUT |Towers of Hanoi (run myrtle:hanoi)|
+
+CREATORS [melody]
+
+NEWTURTLE "myrtle
+
+TO hanoi
+  ;This is a simple recreation of the classic
+  ;Towers of Hanoi game. It has fairly basic logic
+  ;and would nake a great introduction to game creation
+  ;using turtleSpaces
+
+  ;as a project, we would create the text-game
+  ;first and then add the graphical representation
+  ;later (as a 'stretch goal')
+
+  reset
+  hideturtle
+  penup
+  ;reset and set up workspace
+
+  make "moves 0
+  ;initialize the moves counter
+
+  ;*** OPTIONAL ***
+  make "camerastep 1
+  ;define camera 'step'
+  cam:orbitdown 90
+  ;position camera
+  ;*** END OPTIONAL ***
+
+  print |*** TOWERS OF HANOI ***|
+  print |Move the disks from rod 1 to rod 3, keeping the same order|
+  print |(largest at the bottom to smallest at the top)|
+  cursordown
+  playsound "doodoo
+  ;instructions
+
+  label "start
+  question |Number of Disks (3-9)?|
+  make "disks answer
+  if not numberp :disks [go "start]
+  if or :disks < 3 :disks > 9 [go "start]
+  ;select number of disks to play with
+  ;and validate choice
+
+  if :disks > 6 [print |Wow! You're brave! Good luck!| cursordown]
+  ;message of encouragement for hard levels
+
+  ;*** OPTIONAL ***
+  control "snappy {"raise 2 * :disks}
+  control "snappy {"pullin 140 - (8 * :disks)}
+  make "snappypos snappy:position
+  make "snappyvec snappy:vectors
+  ;position camera based on number of disks
+  ;and store the camera position.
+  ;this can be omitted if text-only game
+  ;*** END OPTIONAL ***
+
+  make "rod1 reverse range {1 :disks}
+  make "rod2 []
+  make "rod3 []
+  ;define the rod lists, creating the disks
+  ;on the first rod
+
+  label "select
+  ;labels can be returned to using 'go'
+
+  (show :rod1 :rod2 :rod3)
+  ;show the rod lists
+  (show |Moves elapsed:| :moves)
+  ;and the move count
+
+  ;*** OPTIONAL ***
+  drawdisks
+  ;draw the graphical representation
+  ;(via the optional drawdisks user procedure)
+  ;*** END OPTIONAL ***
+
+  question |Rod?|
+  make "selection word "rod answer
+  if not namep :selection [print |Invalid selection!| go "select]
+  if (count thing :selection) = 0 [print |Invalid rod!| go "select]
+  ;select the source rod and check for validity
+
+  label "dest
+  question |Destination?|
+  make "destination word "rod answer
+  if not namep :destination [print |Invalid selection!| go "dest]
+  if (last thing :destination) < (last thing :selection) [
+    print |Invalid move!|
+    go "select
+  ]
+  ;select the destination rod and check for validity
+
+  make "disk dequeue :selection
+  queue :disk :destination
+  ;move the disk, by 'dequeuing' or removing the last
+  ;item from the selected rod into a variable,
+  ;and then queuing the item (adding it as the last
+  ;item) to the destination rod
+
+  inc "moves
+  ;increment the moves counter
+
+  ;*** OPTIONAL ***
+  ;the following orbits the camera around the game
+  ;to spice it up a little:
+  inc "camerastep
+  ;increment the camerastep container
+  cam:repeat 45 [orbitright 1]
+  ;orbit the camera 45 degrees right
+  if divp 3 :camerastep [cam:repeat 45 [orbitright 1]]
+  ;if camerastep divisible by 3 then orbit another 45
+  ;so we're not looking at the side of the game
+  ;*** END OPTIONAL ***
+
+  if :rod3 = reverse range {1 :disks} [
+    drawdisks
+    ;update the graphics (OPTIONAL)
+
+    control "snappy {
+    "setposition :snappypos
+    "setvectors :snappyvec
+    }
+    ;restore the camera position (OPTIONAL)
+
+    print |You win! Great job. Try more disks!|
+    (print |Moves taken:| :moves)
+    playsound "applause
+    finish
+  ]
+  ;check the third rod for a completed tower
+  ;and if complete, displays 'win' message and quits
+
+  go "select
+  ;return (loop back) to select label
+
+END
+
+TO drawdisks
+  ;the graphical representation of the towers is
+  ;optional, and makes a good 'stretch goal'
+
+  ;you can start with just rendering the disks,
+  ;then add a base and rods, and finally
+  ;rod numbers (to make it easier to keep track
+  ;of the rods when playing with camera rotation
+  ;enabled)
+
+  norender
+  ;don't update graphics until render is called
+
+  clean
+  ;erase graphics
+
+  setposition {-50 - 4 * :disks 0 - 4 * :disks 0}
+  setfillcolor brown
+  voxeloid 2 * (50 + 4 * :disks) 2 * (4 * :disks) 5
+  ;create base of appropriate size
+
+  repeat 3 [
+    setposition {-100 + (50 * repcount) 0 0}
+    rollright 180
+    setfillcolor brown
+    cylinder 2 5 + :disks * 5 10
+    rollright 180
+    raise 5
+    ;create rod of appropriate height
+
+    if 0 < count thing word "rod repcount [ ;if there are disks on the rod: foreach "i thing word "rod repcount [ ;for each disk on the rod: setfillcolor :i ;set the color based on the disk size cylinder 2 + (2 * :i) 5 10 * :i ;create the disk raise 5 ] ] ] ;create disks on each rod up 90 settypesize 5 + (:disks / 4) repeat 3 [ setfc item repcount [13 11 14] setposition { (-100 - :disks / 2) + 50 * repcount 0 - 4 * :disks (-14 - (:disks / 3)) - (:disks / 4) } typeset repcount ] ;print numbers under towers rollright 180 repeat 3 [ setfc item repcount [14 11 13] setposition { (100 + :disks / 2) - 50 * repcount 4 * :disks (-14 - (:disks / 3)) - (:disks / 4) } typeset 4 - repcount ] ;print numbers under towers opposite side rollright 180 down 90 ;return the turtle to the proper orientation render ;resume rendering if :moves > 0 [playsound "knock]
+  ;if not the start of the game, make a sound
+
+END
+
+NEWTURTLE "snappy
+
+
+NEWTURTLE "libby

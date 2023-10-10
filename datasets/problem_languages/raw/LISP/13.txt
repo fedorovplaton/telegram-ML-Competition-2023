@@ -1,0 +1,53 @@
+#! /usr/bin/gcl -f
+
+; When dealing with a simple value (e,g, a character, an integer, a real, a t/nil)
+;    the variable simply holds that value.
+; When dealing with a non-nil list (or sequence, array, structure, etc)
+;    the variable is a reference (pointer) to the actual list content,
+;    which in turn is a cascading sequence of car/cdr pairs (value of car, addr of tail),
+;
+; e.g L = '(10 20 30) might look like
+;
+;       L is actually a reference to first pair,
+;         first pair is value 10 and a reference to second pair
+;             second pair is 20 and a reference to third pair
+;                 third pair is 30 and nil
+;
+; When we copy one variable into another it either copies the value or the reference,
+;    e.g. (defvar a 1)
+;         (defvar b a)  ; copies value of a into b
+;         (defvar M L)  ; copies reference value from L into M, so they
+;                       ;    are both pointing at the same list
+;
+; When we cons an element onto the front of a list, we're creating a new pair
+;    whose content is the element value and the reference to the list,
+;    so now the tail of the new list is also a reference to the original list.
+;
+; When we implemented our append function, it worked by cons'ing values from the
+;    first list onto the second list, so effectively we get a COPY of the content
+;    of the first list, followed by a reference to the second list.
+;
+; When we use (setf (elt L pos) value) the setf is going through the chain of
+;    references and altering the value in the correct pair, so it is genuinely
+;    changing the content somewhere inside the list.
+;
+; Understanding the list implementation, and knowing when we're copying content from
+;    a list versus when we're copying a reference to a portion of a list, allows us
+;    to understand when there will/won't be side effects associated with an operation
+;    on a list (or portion thereof).
+;
+; The code segment below illustrates some of these points
+
+(defvar L1 '(1 2 3))
+(defvar L2 L1)                   ; L2 points to same list as L1
+(defvar L3 (cons 0 L1))          ; cdr L3 points to same list as L1
+(defvar L4 (cons 4 (cdr L2)))    ; cdr L4 points to same list as cdr L2 (L1)
+(defvar L5 (append L1 L2))       ; L5 is copy of L1 followed by ptr to same list as L2 (L1)
+(setf (elt L1 2) -2)
+(setf (elt L2 1) -1)
+
+(format t "L1 ~A~%" L1) ; L1 (1 -1 -2)
+(format t "L2 ~A~%" L2) ; L2 (1 -1 -2)
+(format t "L3 ~A~%" L3) ; L3 (0 1 -1 -2)
+(format t "L4 ~A~%" L4) ; L4 (4 -1 -2)
+(format t "L5 ~A~%" L5) ; L5 (1 2 3 1 -1 -2)

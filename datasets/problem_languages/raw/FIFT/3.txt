@@ -1,0 +1,5 @@
+variable counter
+{ counter 0! } : reset-counter
+{ counter @ 1+ dup counter ! } : next-counter
+reset-counter next-counter . next-counter . next-counter .
+reset-counter next-counter .

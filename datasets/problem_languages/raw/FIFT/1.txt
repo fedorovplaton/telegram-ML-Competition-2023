@@ -1,0 +1,7 @@
+// a b c d -- (a*d-b*c) b*d
+{ -rot over * 2swap tuck * rot - -rot * } : R-
+// a b c d -- a*c b*d
+{ rot * -rot * swap } : R*
+// a b --
+{ swap ._ ."/" . } : R.
+1.7 2/3 R- R.

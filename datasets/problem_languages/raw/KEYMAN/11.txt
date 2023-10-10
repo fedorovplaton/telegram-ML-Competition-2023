@@ -1,0 +1,1 @@
+BOOL WINAPI KeymanIMConfigure(PSTR keyboardname, HWND hwndParent);

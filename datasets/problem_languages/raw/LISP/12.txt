@@ -1,0 +1,48 @@
+
+; list functions
+
+(cons E L)  ; returns new list with E inserted at front of L
+(car L) ; returns front element of L
+(cdr L) ; returns a list of everything except front element of L
+(length L) ; returns length of L
+(listp L) ; true iff L is a list
+(nth N L) ; returns nth element of L
+(copy-list L) ; returns a new list whose contents are duplicates of those in L
+(last L) ; returns last element of L
+(butlast L) ; returns list of everything except last element of L
+(append L1 L2) ; returns list of all elements of L1 followed by all elements of L2
+(member E L) ; true iff E is an element of L
+(remove E L) ; returns copy of L with all elements matching E removed
+(reverse L) ; returns reverse of L
+(null L) ; true iff L is empty
+(position E L) ; returns first position of E in L, or nil if not found
+(subseq L 0 N) ; returns a list of the first N elements of L
+
+; also supported are
+(caar L)  ; (car (car L))
+(cadr L)  ; (car (cdr L))
+(cddr L)  ; (cdr (cdr L))
+(caaar L) ; (car (car (car L)))
+; etc for all combinations of 1-4 a's/d's
+
+; note that setf can be used to change content within a list,
+; e.g. the following changes L from (1 2 3 4) to (1 2 10 20 30)
+;   (defvar L '(1 2 3 4)
+;   (setf (cddr L) '(10 20 30))
+
+; lists in lisp do NOT have to be acyclic
+;    as demonstrated with the macro/call below
+
+; make list L a circular list, i.e. make the cdr of L's last element
+;    refer to the front of L
+(defmacro circle (L)
+   `(if (and (listp ,L) (not (null ,L))) (setf (cdr (last ,L)) ,L)))
+
+
+(defvar data '(1 2 3))
+(format t "Original list: ~A, now make it circular~%" data)
+(circle data)
+
+; before we try to print the list, turn on circle-detection so we don't get infinite output
+(let ((*print-circle* t))
+   (format t "New list (printed with circle-detection on, circular refs indicated with #refNum):~% ~A~%" data))

@@ -1,0 +1,138 @@
+NEWTURTLE "myrtle
+
+TO floaty
+  ;here is yet another example of a relatively complex
+  ;game that can be rather simply implemented in Logo:
+  ;a flappy bird clone!
+
+  ;to make it work we use two turtles, one is the player
+  ;and the other creates, moves and erases the pipes
+  ;these are two seperate 'workers' or threads
+
+  ;this procedure kicks off the game, displays a title
+  ;screen, and then manages the player, processing
+  ;input and moving the player appropriately
+
+  ;the pipemaker turtle and its pipes procedure
+  ;manages the pipes and checks for collisions
+
+  ;the turtle does not move horizontally,
+  ;instead the pipes do!
+
+  reset
+  cleartext
+  setbackgroundcolor pick [6 7 14 5 10 11 14 15]
+  ;select a random background color from the given list
+
+  noaudiowait
+  ;don't wait for audio to finish playing
+
+  setmodel [penup back 7 stamp "myrtle]
+  ;we need to offset Myrtle's actual position more
+  ;toward her center for the purposes of this game
+
+  setmodelscale 5
+  ;make myrtle big!
+
+  playsound "doodoo
+  ;startup sound
+
+  pipemaker:newworker [pipes]
+  ;'kicks off' the pipemaker turtle, who
+  ;creates and moves the pipes
+
+  ;create the title screen:
+
+  penup
+  randomfillcolor
+  slideleft 180 forward 5
+  settypesize 60
+  pushturtle
+  ;'push' the turtle's state (position etc) on
+  ;to a stack, from which it can be 'popped'
+  ;off later
+
+  typeset "Floaty
+  popturtle
+  ;restore the previously pushed state
+
+  back 100
+  randfc
+  ;short for randomfillcolor
+
+  pushturtle
+  typeset "Turtle
+  popturtle
+  bk 10 sr 70
+  ;back and slideright
+
+  settypesize 10
+  randfc
+  typeset |Press any key to float!|
+  ;title screen complete!
+
+  home
+  dn 90 rt 90
+  ;down and right
+
+  make "raise 0
+  ;the :raise container holds the current
+  ;value remaining to float Myrtle upwards
+
+  forever [
+
+    if loopcount = 1 [say "Ready!]
+    if loopcount = 16 [say "Set!]
+    if loopcount = 31 [say "Go!]
+    ;the loopcount is the number of times the forever
+    ;loop has executed. Based on that count, say the
+    ;appropriate ready set go component
+
+    if divisorp 100 loopcount [
+      ;every 100 loops pick a random background
+      setbg pick [6 7 14 5 10 11 14 15]
+      ;from the given list
+    ]
+    ;setbg short for setbackground
+
+    dosleep [50] [
+      ;try to maintain an average of 50ms to do
+      ;the following:
+
+      if loopcount > 30 [
+        ;if the loopcount is greater than 30:
+
+        if :raise = 0 [
+          ;if the value inside the :raise container
+          ;is 0, then lower the turtle 2.5 turtle-units:
+
+          lower 2.5
+        ]
+        [
+          ;otherwise raise the turtle 2.5 turtle-units
+          ;and decrease the value inside the :raise
+          ;container by 2.5
+          raise 2.5
+          make "raise :raise - 2.5
+        ]
+
+        if keyp [
+          ;if a key is pressed, play a sound,
+          ;remove the key from the keyboard buffer
+          ;and increase the value of the :raise
+          ;container by 20:
+
+          playsound "air
+          clearchar
+          make "raise :raise + 20
+        ]
+
+        clean
+        ;remove the turtle's 'track' -- it's not
+        ;drawing or creating anything so we don't
+        ;need to have it piling up
+
+      ]
+    ]
+  ]
+END

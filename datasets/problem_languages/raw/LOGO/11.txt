@@ -1,0 +1,69 @@
+TO ghost
+  up 90
+  make "gc 1 + random 14
+  make "ec pick [0 1 2 3 4 8 9]
+  setfc :gc
+  dome 50 20 18
+  rr 180
+  cylinder 50 50 18
+  lo 50
+  dn 90
+  repeat 18 [
+    tent 9 30 49.2
+    rl 20
+  ]
+  setfc 15
+  up 90
+  ra 50
+  fd 50
+  rr 90
+  icospheroid 15 1.5
+  fd 15
+  setfc :ec
+  icospheroid 7.5 1.5
+  rl 90
+  bk 65
+  rt 40
+  fd 50
+  setfc 15
+  rr 90
+  icospheroid 15 1.5
+  fd 15
+  setfc :ec
+  icospheroid 7.5 1.5
+  rl 90
+END
+
+TO ghostcircle
+  reset
+  snappy:newworker [
+    setposition [0 0 0]
+    dropanchor
+    forever [
+      orbitleft 0.5
+      wait 1
+    ]
+  ]
+  randbg
+  setbs 13
+  setfs 0
+  dropanchor
+  up 90
+  pu
+  ra 80
+  gradient
+  randpc
+  setfc bg
+  spot 400
+  lo 80
+  nogradient
+  pullout 300
+  repeat 18 [
+    pushturtle
+    dn 90
+    rr 20
+    ghost
+    popturtle
+    orbitright 20
+  ]
+END

@@ -1,0 +1,52 @@
+TO wordle
+  reset hideturtle make [score level stage] [0 1 1] maximize settextsize 1
+  cleartext overlayscreen settextwindow [0 30 99 47] settextforeground 14 ;short form: settf
+  print |TurtleWordle: Get one point for each letter in solution, lose one point for each guess.|
+  print |You have word-length + 1 chances to guess the word. Level acts as score multiplier.|
+  print |Get 6 4-letter words correct to advance, 5 5-letter words, 4 6-letter words and so-on.|
+  print |Game ends when you run out of guesses, or guess the 9-letter word! (You brain you!)|
+  print |Uppercase indicates correct letter and position, lowercase only that letter is in word.|
+  cursordown playsound "drop ;we use simple encryption not to make this too easy!
+  make "words1  [bsai dpme ql?n kgli hskn ap?@ jmai qj?k afsk ngli mtcp jmem dgpc @cr? @jsc ctcl]
+  make "words2  [xc@p? nsnnw kmsqc ?@msr slbcp fmpqc qmslb jmaiq @p?gl ilmai lmprf ?jnf? glbcv]
+  make "words3  [q?j?kg ngaijc afccqc igrrcl ngejcr rsprjc rmgjcr @mtglc amddcc ecp@gj bctglc]
+  make "words4  [mar?nsq qg@jgle mnsjclr ejsrrml n?wkclr asqfgml n?p?qmj jcrrcpq gltmjtc @j?licr]
+  make "words5  [bp?k?rga nclr?eml kmrmpa?p qmjsrgml slbcpqc? mtcpam?r sk@pcjj? l?rrpcqq qslqfglc]
+  make "words6  [qs@k?pglc u?rcpd?jj qrpccra?p slbcpuc?p bcqrpmwcp ?n?prkclr bmaskclrq pm?bam?af]
+  label "select ;return here using 'go'
+  if :level = 7 [settf 3 print |Congratulations! You win!| playsound "applause go "playagain]
+  make "selection random count thing word "words :level
+  make "enword uppercase item :selection thing word "words :level
+  make word "words :level remove :selection thing word "words :level
+  make "word empty foreach "char :enword [make "word word :word char (ascii :char) + 34]
+  make "chances 1 + count :word make "tries 0 clearscreen penup setfillcolor 12 ht
+  settypesize 20 setxy -200 80 typeset "Turtle setxy 80 80 typeset "Wordle settypesize 10 home st
+  foreach "letter "abcdefghijklmnopqrstuvwxyz [make :letter instances :letter :word]
+  forever [
+    foreach "letter "abcdefghijklmnopqrstuvwxyz [make word "p :letter 0]
+    settf 6 (print |Tries remaining:| :chances - :tries) settf 15
+    dountil (count :guess) = (count :word) [
+      (type |Word is | count :word | letters: |) make "guess lowercase readword]
+    inc "tries make "correct 0 make "hits []
+    setxy 0 - (5 * count :word) 100 - (:tries * 20)
+    foreach "letter :guess [
+      if :letter = item loopcount :word [inc word "p :letter] ]
+    foreach "letter :guess [
+      if :letter = item loopcount :word [
+        settf 4 type uppercase :letter
+        setfc 4 typeset uppercase :letter
+        inc "correct playsound "drop queue loopcount "hits
+      ] [if containsp :letter :word [inc word "p :letter
+          if (thing word "p :letter) <= thing :letter [ settf 13 type lowercase :letter setfc 13 typeset lowercase :letter playsound "drip] [ settf 15 setfc 15 type "- typeset "- playsound "dunk] ] [settf 15 setfc 15 type "- typeset "- playsound "dunk] ] ] print empty slideright 10 if :correct = count :word [ settf 12 type |You got it! | playsound pick [sheep sheep2 sheep3] make "score :score + ((1 + ((count :word) - :tries)) * :level) if (:chances - :tries) > 0 [
+        inc "stage if :stage = 8 - :level [
+          make "stage 1 inc "level settf 9 print |Level up!| playsound "please] ] [
+        settf 1 print |No points. Try again.| playsound "crow]
+      settf 13 print sentence |Your score is: | :score go "select]
+    if :tries = :chances [settf 3 (print |Word was:| :word)
+      settf 7 (print |Too bad! Final score: | :score) playsound "evil go "playagain]
+    if 0 = remainder :tries 3 [
+      dountil not containsp :pick :hits [make "pick 1 + random count :word] settf 8
+      (print |Psst: the letter in position | :pick | is | uppercase item :pick :word |!|)] ]
+  label "playagain settc 13 question |Play again? (Y/N)|
+  if "N = uppercase answer [restore resetall finish] [wordle]
+END

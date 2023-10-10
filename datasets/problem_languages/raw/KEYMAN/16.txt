@@ -1,0 +1,1 @@
+BOOL WINAPI KMGetContext(PWSTR buf, DWORD len);

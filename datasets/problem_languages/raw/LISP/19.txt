@@ -1,0 +1,48 @@
+#! /usr/bin/gcl -f
+
+; tagbody and go can be used to jump to labelled locations
+;    anywhere in a block of lisp statements
+; (distinctly NOT "pure" functional programming!)
+;
+; syntax:
+;    (tagbody
+;       ... lisp statements ...
+;       Label1
+;       ... more lisp statements ...
+;       (if (condition) (go AnotherLabel))
+;       ... more lisp statements ...
+;       AnotherLabel
+;       ... more lisp statements ...
+;       (if (condition) (go Label1))
+;    )
+
+; example using tagbody and go to create a loop structure
+; =======================================================
+
+; (repeat N action)
+; -----------------
+; repeat the action N times
+(defun repeat (N action)
+   (let
+      ; local variable to compute the result so far
+      ((result nil))
+      (cond
+         ((not (integerp N)) nil)
+         (t (tagbody
+            TestLoop
+            ; if N < 1 jump past the action
+            ;    to return the result
+            (if (< N 1) (go EndLoop))
+            ; otherwise run the action,
+            ;    set the result,
+            ;    update the counter,
+            ; and return to the loop test
+            RunAction
+               (setq result (eval action))
+            UpdateCounter
+               (setq N (- N 1))
+               (go TestLoop)
+            EndLoop)
+               result))))
+
+(repeat 3 '(format t "Hi!~%"))

@@ -1,0 +1,26 @@
+#! /usr/bin/gcl -f
+
+; function to print an arrays dimensions and contents
+(defun prtArr (arr)
+   (cond
+      ((not (arrayp arr)) (format t "Not an array ~A~%" arr))
+      (t (block
+            (format t "the array dimensions are ~A~%" (array-dimensions arr))
+            (format t "the length of dimension 0 is ~A~%" (array-dimension arr 0))
+            (format t "and its contents are ~A~%" arr)
+         )
+      )
+   )
+)
+
+; create a 3x4 array, initialize the contents to 0
+(setf myArr (make-array '(3 4) :initial-element 0))
+
+; set element [2][3] to -1
+(setf (aref myArr 2 3) -1)
+
+; set element [1][0] to 1
+(setf (aref myArr 1 0) 1)
+
+; pass the array to prtArr for display
+(prtArr myArr)

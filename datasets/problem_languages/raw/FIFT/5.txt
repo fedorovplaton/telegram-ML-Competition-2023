@@ -1,0 +1,8 @@
+{ hole dup 1 ’ @ does create 1 ’ ! does create } : variable-set
+variable-set x x!
+variable-set y y!
+{ ."x=" x . ."y=" y . ."x*y=" x y * . cr } : show
+{ y 1+ y! } : up
+{ x 1+ x! } : right
+{ x y x! y! } : reflect
+2 x! 5 y!

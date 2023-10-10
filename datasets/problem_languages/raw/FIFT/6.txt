@@ -1,0 +1,12 @@
+1 2 3 triple 4 5 6 triple 7 8 9 triple triple constant Matrix
+Matrix .dump cr
+| 1 "one" pair , 2 "two" pair , 3 "three" pair , .dump
+
+10 allot constant A
+| 3 box , 1 box , 4 box , 1 box , 5 box , 9 box , constant B
+{ over @ over @ swap rot ! swap ! } : swap-values-of
+{ B swap [] } : B[]
+{ B[] swap B[] swap-values-of } : swap-B
+{ B[] @ . } : .B[]
+0 1 swap-B 1 3 swap-B 0 2 swap-B
+0 .B[] 1 .B[] 2 .B[] 3 .B[]

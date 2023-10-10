@@ -1,0 +1,19 @@
+() recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+	slice cs = in_msg_full.begin_parse();
+	int flags = cs~load_uint(4);
+
+	if (flags & 1) {  ;; ignore all bounced messages
+		return ();
+	}
+
+	slice sender_address = cs~load_msg_addr();
+
+	var (marketplace_address, nft_address, nft_owner_address, full_price, fees_cell) = load_data();
+
+	var is_initialized = nft_owner_address.slice_bits() > 2; ;; not initialized if null address
+
+	if (~ is_initialized) {
+
+
+	}
+}

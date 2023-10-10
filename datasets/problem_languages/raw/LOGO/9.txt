@@ -1,0 +1,175 @@
+TO witch
+  reset cam:pullout 150 cam:orbitleft 20 cam:orbitup 10
+  begintag "pumpkin
+  pumpkin
+  endtag
+  newmodel "pumpkin "pumpkin
+  cs
+
+   pu setfs 0
+  dn 90 ra 80
+  setoriginvectors vectors
+  pushturtle
+  setfc 5
+  rr 180
+  cone 40 100 20
+  cylinder 80 5 20
+
+ rr 180
+  setfc 1
+  up 5
+  cylinderslice 40 50 20 10
+  lo 50
+  cutsphereslice 40 20 20 10 20 10
+  up 90
+  spot 40
+  dn 90
+  ra 50
+  dn 5
+  lo 30
+  setfc 11
+  rl 90
+  icospheroid 35 1.5
+  rr 90
+  ra 20
+  lt 30
+  bk 30
+  setfc 2
+  ico 7
+  fd 30
+  rt 60
+  bk 30
+  ico 7
+  fd 30
+  lt 30
+  lo 30
+  up 90
+  rr 180
+  up 10
+  setfc 11
+  cutcone 15 7 60 20
+  lo 60
+  setfc 1
+  dome 7 20 20
+  popturtle
+
+
+lo 100
+  setfc 2
+  rr 180
+  cappeddomoid 30 20 20 2
+  rr 180
+  setfc 9
+  cylindroid 30 50 20 1.2
+  pushturtle
+  lo 50
+  domoid 30 50 20 1.2
+  repeat 2 [
+    pushturtle
+    sr 25
+    lo 10
+    dn 30
+    rr 180 dome 20 20 20
+    rr 180
+    cylinder 20 50 20
+    lo 50
+    ico 20
+    up 90
+    cutcone 20 15 50 20
+    lo 50
+    setfc 2
+    cylinder 20 20 20
+    lo 20
+    dn 90
+    cylindroid 10 20 20 2
+    lo 20 domoid 10 20 20 2
+    ra 20 rr 180
+    cylindroid 10 10 20 2
+    lo 10
+    domoid 10 20 20 2
+    popturtle sl 50]
+  popturtle
+  pushturtle
+  sr 45
+  dn 20
+  ra 4
+  setfc 11
+  cylinder 13 50 20
+  lo 50
+  ico 13
+  dn 90
+  cutcone 13 8 50 20
+  lo 50
+  ico 12
+  setmodelscale 0.5
+  dn 90 rt 160 lo 25 stamp "pumpkin
+  setmodelscale 1
+  popturtle
+  pushturtle
+  sl 45
+  dn 20
+  ra 4
+  setfc 11
+  rl 9
+  cylinder 13 50 20
+  lo 50
+  ico 13
+  dn 20
+  rl 40
+  cutcone 13 8 50 20
+  lo 50
+  ico 12
+
+ setvectors originvectors
+  setx 0
+  pushturtle
+  up 80
+  setfc 8
+  cylinder 5 100 20
+  lo 100
+  lo 5
+  rr 180
+  cappeddomoid 13 20 20 3.5
+  rr 180
+  cylindroid 13 15 20 3.5
+  lo 15
+  sl 35
+  setfc 13
+  repeat 15 [
+    rl -8 + repcount
+    cylinder 0.1 * (10 + random 20) 70 20
+    rr -8 + repcount
+    sr 5
+    randfs
+  ]
+  sl 72.5
+  fd 5
+  repeat 14 [
+    randfs
+    rl -7 + repcount
+    cylinder 0.1 * (10 + random 20) 70 20
+    rr -7 + repcount
+    sr 5
+  ]
+  bk 10
+  sl 5
+  repeat 14 [
+    randfs
+    rr -7 + repcount
+    cylinder 0.1 * (10 + random 20) 70 20
+    rl -7 + repcount
+    sl 5
+  ]
+  popturtle
+  up 90
+  rr 180
+  up 10
+  setfc 8
+  cylinder 5 100 20
+  lo 100
+  dome 5 20 20
+  dn 90
+  ra 5
+  bk 10
+  st
+END

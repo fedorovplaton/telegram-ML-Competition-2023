@@ -1,0 +1,147 @@
+TO devil
+  cs
+  pu
+  setfc 11
+  cylinder 10 50 20
+  bk 10
+  voxeloid 50 20 50
+  fd 10
+  sr 50
+  cylinder 10 50 20
+  sl 60
+  voxeloid 70 50 50
+  fd 50
+  sr 10
+  cylinder 10 50 20
+  bk 10
+  voxeloid 50 20 50
+  fd 10
+  sr 50
+  cylinder 10 50 20
+  rr 180
+  repeat 2 [
+    repeat 4 [
+      dome 10 5 20
+      rl 90
+      cylinder 10 50 20
+      rr 90
+      sr 50
+      rt 90
+    ]
+    up 180
+    ra 10
+    voxeloid 50 50 10
+    lo 60
+    lt 90
+  ]
+  lo 10
+  bk 15
+  sr 15
+  lo 0.1
+  setfc 1
+  polyoval 10 5 100
+  bk 20
+  polyoval 10 5 100
+  sl 10
+  rr 180
+  fd 5
+  rt 60
+  quad 15 3
+  rt 30
+  sl 10
+  rt 30
+  quad -15 3
+  lt 30
+  sr 5
+  bk 40
+  pushturtle
+  repeat 8 [
+    quad 4 3
+    sr 4
+    lt 10
+  ]
+  popturtle
+  pushturtle
+  repeat 8 [
+    quad -4 3
+    sl 4
+    rt 10
+  ]
+  popturtle
+  fd 50
+  lo 20
+  sl 20
+  up 90
+  pushturtle
+  repeat 2 [
+    repeat 15 [
+      cylinder 16 - repcount 10 10
+      lo 8
+      up 10
+      rr 30 - 20 * repabove 1
+    ]
+    popturtle
+    sr 40
+    pushturtle
+  ]
+
+   sl 60
+  ra 60
+  bk 15
+  rr 180
+  rt 20
+  setfc 13
+  cylinder 30 10 20
+  setfc 1
+  lo 10
+  cylindroid 30 20 20 2
+  sl 40
+  setfc 1
+  cylindroid 20 100 20 1
+  pusht
+  lo 100
+  ico 20
+  up 120
+  rr 30
+  cutcone 20 10 100 20
+  lo 100
+  up 90
+  rl 15
+  ra 20
+  setfc 10
+  cylinder 20 40 20
+  popt
+  pusht
+  sr 80
+  cylinder 20 100 20
+  lo 100
+  ico 20
+  up 60
+  rl 20
+  cutcone 20 10 100 20
+  lo 100
+  setfc 5
+  up 90
+  rl 10
+  ra 20
+  cylinder 20 40 20
+  popt
+  sr 40
+  cylinder 40 100 20
+  lo 160
+  rr 90
+  ra 20
+  setfc 11
+  cylinder 60 40 20
+  setfc 13
+  ra 5
+  cylinder 10 50 20
+  lt 90
+  lo 2.5
+  up 90
+  cylinder 2.5 100 10
+  dn 90
+  lo 45
+  up 90
+  cylinder 2.5 100 10
+END

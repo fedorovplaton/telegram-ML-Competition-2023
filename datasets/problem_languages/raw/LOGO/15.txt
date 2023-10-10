@@ -1,0 +1,138 @@
+TO trapped
+  reset
+  setmodel "plane
+  ;sets Myrtle's model to the built-in plane model
+
+  begintag "col
+  setfillcolor 1 + random 15
+  endtag
+  ;the contents of tags can be used to create models, or
+  ;they can be disabled or replaced. We're going to replace
+  ;the contents of this tag later in our procedure, to change
+  ;the color of the torus 'on the fly' (ba-dum)
+
+  torus 30 -50 20 20
+  ;creates an inverted torus by inverting the radius parameter.
+  ;Closed shapes such as the torus don't ordinarily have an 'inside'
+  ;unless we create them inverted.
+
+  ;Why do we want to invert it?
+
+  ;We're going to switch the camera turtle to Myrtle, and so
+  ;we want to see inside the torus, not the outside. To do this,
+  ;we invert it, as demonstrated above.
+
+  penup
+  ;don't forget, the turtle draws a line by default
+
+  dropanchor
+  tether
+  pullout 50
+  left 90
+  ;We're going to use the orbit primitive to move Myrtle
+  ;inside of the torus. So we 'dropanchor' at Myrtle's position,
+  ;to set the 'anchorpoint' that the orbit primitives rotate around,
+  ;'tether' to keep the anchor point static (because otherwise
+  ;when Myrtle turns the anchor point moves to stay in front of
+  ;her) 'pullout' 50 turtle units from the anchor point, and then
+  ;turn left 90 degrees (which we can do because we called tether)
+
+  ;To demonstrate the need for tether, try:
+  ;reset repeat 36 [repeat 90 [orbitleft 4] right 10]
+  ;As you can see, the point Myrtle orbit arounds moves when she
+  ;turns right. Put a 'tether' primitive before the first repeat
+  ;and notice the difference!
+
+  setpremodel [rt 10]
+  ;'setpremodel' allows us to put commands between the 'turtle track'
+  ;that contains everything the turtle draws and the turtle model
+  ;itself.
+
+  ;When we attach the camera to a turtle, its position is
+  ;set before premodel (and the turtle model) and so we can use
+  ;setpremodel to change the position and orientation of the turtle
+  ;as seen from the camera. And so we will see the model pointing
+  ;slightly to the right
+
+  setview "myrtle
+  ;set the camera to show Myrtle's point of view
+
+  snappy:setlight 0
+  ;turn Snappy (the normal camera turtle)'s light off.
+  ;Snappy has a light on by defalt.
+
+  setlight 2
+  ;turn Myrtle's light on. The value 2 is a point light,
+  ;which casts light around Myrtle
+
+  setdiffuse [40 40 40 100]
+  setambient [0 0 0 0]
+  ;these set paramets related to the light.
+  ;see their help entries for more information
+
+  setviewpoint [5 10 -50]
+  ;sets the position of the camera relative to the turtle
+  ;as a list of [x y z]. So in this case, to the right, above
+  ;and behind the turtle
+
+  forever [
+
+    setpremodel {
+    "right 20 - 30 * (sin 0.5 * loopcount)
+    "slideright -5 + 10 * (sin 0.5 * loopcount)
+    "up 10 * (sin loopcount)
+    "raise 2.5 - 10 * (0.5 * sin loopcount)
+    }
+
+    ;curly braces indicate a 'softlist', a list that is
+    ;evaluated at the time of execution (the point at
+    ;which the interpreter interprets the list).
+    ;They allow us to use functions and containers to
+    ;assemble a list dynamically.
+
+    ;In this case, we're using the sin function and loopcount
+    ;to move the turtle model relative to its position and
+    ;simulate the motion of an aircraft in flight.
+
+    ;loopcount is similar to repcount, but is used in non-repeat
+    ;loops such as forever, while, until, dowhile, dountil and
+    ;foreach.
+
+    ;it counts the number of times the loop has been executed
+
+    orbitleft 0.5
+    ;orbit to the left half a degree. In this case, 'to the left'
+    ;causes the turtle to appear to move forward. But remember,
+    ;we turned the turtle to the left earlier in the procedure!
+
+    if divp 300 loopcount [
+      replacetag "col {
+      "setfillcolor 1 + random 15
+      "setfs -15 + random 30
+      }
+    ]
+    ;divp (or divisorp) returns true if the numerator (the first
+    ;number) divides equally into the denominator (the second
+    ;number, in this case the loopcount.)
+
+    ;if divp returns true, we replace the "col tag we created
+    ;earlier in the procedure with new contents setting a random
+    ;color and shade. We need to use curly braces so that the
+    ;random numbers are generated at the time we call replacetag.
+
+    ;note that the primitives need to have a " in front of them
+    ;so they are not themselves executed when the softlist is
+    ;evaluated! By putting a quotation mark in front of them,
+    ;they are evaluated as words and passed verbatim to
+    ;the replacetag primitive.
+
+    ;there are other ways to do this that you can do in other
+    ;Logo environments but they are more cumbersome.
+
+    sleep 5
+    ;sleep for 5 milliseconds
+
+  ]
+  ;do this forever, or until we press escape or the stop button
+
+END

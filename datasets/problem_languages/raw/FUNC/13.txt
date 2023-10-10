@@ -1,0 +1,11 @@
+() recv_internal (int balance, int msg_value, cell in_msg_full, slice in_msg_body) {
+ ;; take op, query_id, and the sender's address sender_address
+
+  if (op == 1) {
+    ;; here we will save the address received from the manager
+  } elseif (op == 2) {
+      ;; send a message
+  } else {
+      ;; here will be an exception
+  }
+}

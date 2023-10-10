@@ -1,0 +1,413 @@
+TO game
+  reset
+  penup hideturtle
+  
+  ;create table to hold tetris piece placement information:
+  newtable "board [10 21]
+  
+  ;draw playfield border:
+  setpos [-60 -110]
+  voxeloid 10 210 10
+  voxeloid 120 10 10
+  setpos [50 -110]
+  voxeloid 10 210 10
+  
+  make "gameover false
+  make "score 0
+  
+  dountil :gameover [
+    
+    ;pick random piece:
+    make "piece pick [square hline vline hzed vzed hess vess]
+    
+    ;the logic is easier to implement if each orientation of a shape
+    ;is its own piece. While this means implementing a lot of pieces
+    ;to make a full Tetris game, it avoids cumbersome if statements
+    
+    ;TODO: tee0 tee90 tee180 tee270 -- T shapes
+    ;TODO: jay0 jay90 jay180 jay270 -- J shapes
+    ;TODO: elle0 elle90 elle180 elle270 -- L shapes
+    ;MAYBE: crowbar corkscrew rightangle cshape?
+    
+    show :piece
+    
+    randomfillcolor
+    
+    ;choose random starting placement based on the piece.
+    ;We need to make sure the piece is fully in the playfield
+    ;and doesn't overlap any edges:
+    
+    if :piece = "square [make "y 1 make "x 1 + random 9]
+    if :piece = "hline [make "y 0 make "x 1 + random 7]
+    if :piece = "vline [make "y 3 make "x 1 + random 10]
+    if :piece = "hzed [make "y 0 make "x 1 + random 8]
+    if :piece = "vzed [make "y 2 make "x 1 + random 8]
+    if :piece = "hess [make "y 1 make "x 1 + random 8]
+    if :piece = "vess [make "y 2 make "x 2 + random 9]
+    
+    ;check if the area selected for the new piece is already
+    ;occupied by another piece, if so then game over:
+    
+    if :piece = "square [
+      if (or not emptyp cell "board {:x :y}
+      not emptyp cell "board {:x + 1 :y}
+      not emptyp cell "board {:x :y + 1}
+      not emptyp cell "board {:x + 1 :y + 1}) [make "gameover true]]
+    if :piece = "hline [
+      if (or not emptyp cell "board {:x :y + 1}
+      not emptyp cell "board {:x + 1 :y + 1}
+      not emptyp cell "board {:x + 2 :y + 1}
+      not emptyp cell "board {:x + 3 :y + 1}) [make "gameover true]]
+    if :piece = "vline [
+      if (or not emptyp cell "board {:x :y + 1}
+      not emptyp cell "board {:x :y}
+      not emptyp cell "board {:x :y - 1}
+      not emptyp cell "board {:x :y - 2}) [make "gameover true]]
+    if :piece = "hzed [
+      if (or not emptyp cell "board {:x :y + 1}
+      not emptyp cell "board {:x + 1 :y + 1}
+      not emptyp cell "board {:x + 1 :y + 2}
+      not emptyp cell "board {:x + 2 :y + 2}) [make "gameover true]]
+    if :piece = "vzed [
+      if (or not emptyp cell "board {:x :y + 1}
+      not emptyp cell "board {:x :y}
+      not emptyp cell "board {:x + 1 :y}
+      not emptyp cell "board {:x + 1 :y - 1}) [make "gameover true]]
+    if :piece = "hess [
+      if (or not emptyp cell "board {:x :y + 1}
+      not emptyp cell "board {:x + 1 :y + 1}
+      not emptyp cell "board {:x + 1 :y}
+      not emptyp cell "board {:x + 2 :y}) [make "gameover true]]
+    if :piece = "vess [
+      if (or not emptyp cell "board {:x :y + 1}
+      not emptyp cell "board {:x :y}
+      not emptyp cell "board {:x - 1 :y}
+      not emptyp cell "board {:x - 1 :y - 1}) [make "gameover true]]
+    
+    make "dropped false
+    ;boolean to indicate the piece has 'landed'
+    make "speed 10
+    ;the speed at which the pieces 'fall'
+    
+    dountil :dropped [
+      ;repeat the following until :dropped is true
+      
+      switch "piece
+      ;based on the value of the "piece container, execute one
+      ;of the following case statements:
+      
+      case "square [
+        
+        make "y :y + 1
+        ;increment "y
+        
+        if keyp [
+          make "key readchar
+          if :key = "j [
+            if :x > 1 [
+              if (and emptyp cell "board {:x - 1 :y}
+              emptyp cell "board {:x - 1 :y - 1}) [dec "x]]]
+          if :key = "k [
+            if :x < 9 [ if (and emptyp cell "board {:x + 2 :y} emptyp cell "board {:x + 2 :y - 1}) [inc "x]]] if :key = "m [make "speed 0] clearchar ] ;we check to see if a key has been pressed, and ;if it has, then we see if it's one of the keys ;we respond to, and then we respond to them IF ;moving the piece will not collide with already ;existing pieces. m sets the speed to 0 and causes ;it to drop as quickly as possible ;clearchar clears the keyboard buffer sety 100 - :y * 10 setx -60 + :x * 10 voxeloid 20 20 10 ;sets the turtle's position and draws the shape if :speed > 0 [trackrender]
+        ;don't render if the shape is 'dropping'
+        ;(eg we pressed the m key)
+        
+        wait :speed
+        ;delay in 60ths of a second, so 10 is 1/6th of a second
+        
+        ;check to see if we've landed on another piece,
+        ;or hit the bottom, and then enter the piece position
+        ;into the table:
+        if (or :y = 20
+        not emptyp cell "board {:x :y + 1}
+        not emptyp cell "board {:x + 1 :y + 1}) [
+          setcell "board {:x :y} fc
+          setcell "board {:x + 1 :y} fc
+          setcell "board {:x :y - 1} fc
+          setcell "board {:x + 1 :y - 1} fc
+          make "dropped true
+          ;set dropped to true so we continue to the
+          ;line check routine
+        ]
+        
+        ;if we haven't 'landed' then turn off rendering,
+        ;and 'undo' the drawing of the piece in preparation
+        ;for the next move:
+        else [notrackrender backtrack]
+        
+      ]
+      ;that's it for this piece, on to the next!
+      ;As the pieces get more complex, so does the logic
+      ;needed to position and move them
+      
+      case "hline [
+        
+        make "y :y + 1
+        if keyp [
+          make "key readchar
+          if :key = "j [
+            if :x > 1 [
+              if emptyp cell "board {:x - 1 :y} [dec "x]]]
+          if :key = "k [
+            if :x < 7 [ if emptyp cell "board {:x + 4 :y} [inc "x]]] if :key = "i [ if :y > 3 [make "piece "vline]]
+          if :key = "m [make "speed 0]
+          clearchar
+        ]
+        
+        sety 100 - :y * 10 setx -60 + :x * 10
+        voxeloid 40 10 10
+        if :speed > 0 [trackrender]
+        wait :speed
+        
+        if (or :y = 20
+        not emptyp cell "board {:x :y + 1}
+        not emptyp cell "board {:x + 1 :y + 1}
+        not emptyp cell "board {:x + 2 :y + 1}
+        not emptyp cell "board {:x + 3 :y + 1}) [
+          setcell "board {:x :y} fc
+          setcell "board {:x + 1 :y} fc
+          setcell "board {:x + 2 :y} fc
+          setcell "board {:x + 3 :y} fc
+          make "dropped true
+        ]
+        else [notrackrender bt]
+      ]
+      
+      
+      case "vline [
+        
+        make "y :y + 1
+        if keyp [
+          make "key readchar
+          if :key = "j [
+            if :x > 1 [
+              if (and emptyp cell "board {:x - 1 :y}
+              emptyp cell "board {:x - 1 :y - 1}
+              emptyp cell "board {:x - 1 :y - 2}
+              emptyp cell "board {:x - 1 :y - 3}) [dec "x]]]
+          if :key = "k [
+            if :x < 10 [
+              if (and emptyp cell "board {:x + 1 :y}
+              emptyp cell "board {:x + 1 :y - 1}
+              emptyp cell "board {:x + 1 :y - 2}
+              emptyp cell "board {:x + 1 :y - 3}) [inc "x]]]
+          if :key = "i [
+            if :x < 8 [ if (and emptyp cell "board {:x + 1 :y + 1} emptyp cell "board {:x + 2 :y + 1} emptyp cell "board {:x + 3 :y + 1}) [make "piece "hline]]] if :key = "m [make "speed 0] clearchar ] sety 100 - :y * 10 setx -60 + :x * 10 voxeloid 10 40 10 if :speed > 0 [trackrender]
+        wait :speed
+        
+        if (or :y = 20 not emptyp cell "board {:x :y + 1}) [
+          setcell "board {:x :y} fc
+          setcell "board {:x :y - 1} fc
+          setcell "board {:x :y - 2} fc
+          setcell "board {:x :y - 3} fc
+          make "dropped true
+        ]
+        else [notrackrender bt]
+      ]
+      
+      
+      case "hzed [
+        
+        make "y :y + 1
+        if keyp [
+          make "key readchar
+          if :key = "j [
+            if :x > 1 [
+              if (and emptyp cell "board {:x - 1 :y}
+              emptyp cell "board {:x :y + 1}) [dec "x]]]
+          if :key = "k [
+            if :x < 8 [if (and emptyp cell "board {:x + 2 :y} emptyp cell "board {:x + 3 :y + 1}) [inc "x]]] if :key = "i [if :x > 1 [if (and
+              emptyp cell "board {:x + 1 :y}
+              emptyp cell "board {:x + 1 :y - 1})
+              [make "piece "vzed]]]
+          if :key = "m [make "speed 0]
+          clearchar
+        ]
+        
+        sety 100 - :y * 10 setx -60 + :x * 10
+        voxeloid 20 10 10 bk 10 sr 10 voxeloid 20 10 10
+        if :speed > 0 [trackrender]
+        wait :speed
+        
+        if (or :y = 19 not emptyp cell "board {:x :y + 1}
+        not emptyp cell "board {:x + 1 :y + 2}
+        not emptyp cell "board {:x + 2 :y + 2}) [
+          setcell "board {:x :y} fc
+          setcell "board {:x + 1 :y} fc
+          setcell "board {:x + 1 :y + 1} fc
+          setcell "board {:x + 2 :y + 1} fc
+          make "dropped true
+        ]
+        else [notrackrender repeat 4 [bt]]
+      ]
+      
+      
+      case "vzed [
+        
+        make "y :y + 1
+        if keyp [
+          make "key readchar
+          if :key = "j [
+            if :x > 1 [
+              if (and emptyp cell "board {:x - 1 :y}
+              emptyp cell "board {:x - 1 :y - 1}
+              emptyp cell "board {:x :y - 2}) [dec "x]]]
+          if :key = "k [
+            if :x < 9 [ if (and emptyp cell "board {:x + 1 :y} emptyp cell "board {:x + 2 :y - 1} emptyp cell "board {:x + 2 :y - 2}) [inc "x]]] if :key = "i [ if (and :y > 2 :x < 9 :y < 19) [ if (and emptyp cell "board {:x + 1 :y + 1} emptyp cell "board {:x + 2 :y + 2} emptyp cell "board {:x + 3 :y + 2}) [ make "piece "hzed]]] if :key = "m [make "speed 0] clearchar ] sety 100 - :y * 10 setx -60 + :x * 10 voxeloid 10 20 10 fd 10 sr 10 voxeloid 10 20 10 if :speed > 0 [trackrender]
+        wait :speed
+        
+        if (or :y = 20
+        not emptyp cell "board {:x :y + 1}
+        not emptyp cell "board {:x + 1 :y}) [
+          setcell "board {:x :y} fc
+          setcell "board {:x :y - 1} fc
+          setcell "board {:x + 1 :y - 1} fc
+          setcell "board {:x + 1 :y - 2} fc
+          make "dropped true
+        ]
+        else [notrackrender repeat 4 [bt]]
+      ]
+      
+      
+      case "hess [
+        
+        make "y :y + 1
+        if keyp [
+          make "key readchar
+          if :key = "j [
+            if :x > 1 [
+              if (and emptyp cell "board {:x - 1 :y}
+              emptyp cell "board {:x :y - 1}) [dec "x]]]
+          if :key = "k [
+            if :x < 8 [ if (and emptyp cell "board {:x + 2 :y} emptyp cell "board {:x + 3 :y - 1}) [inc "x]]] if :key = "i [ if (and :y > 2 :x > 1) [
+              if (and emptyp cell "board {:x :y}
+              emptyp cell "board {:x - 1 :y}
+              emptyp cell "board {:x - 1 :y - 1}) [
+                make "piece "vess]]]
+          if :key = "m [make "speed 0]
+          clearchar
+        ]
+        
+        sety 100 - :y * 10 setx -60 + :x * 10
+        voxeloid 20 10 10 fd 10 sr 10 voxeloid 20 10 10
+        if :speed > 0 [trackrender]
+        wait :speed
+        
+        if (or :y = 20
+        not emptyp cell "board {:x :y + 1}
+        not emptyp cell "board {:x + 1 :y + 1}
+        not emptyp cell "board {:x + 2 :y}) [
+          setcell "board {:x :y} fc
+          setcell "board {:x + 1 :y} fc
+          setcell "board {:x + 1 :y - 1} fc
+          setcell "board {:x + 2 :y - 1} fc
+          make "dropped true
+        ]
+        else [notrackrender repeat 4 [bt]]
+      ]
+      
+      
+      case "vess [
+        
+        make "y :y + 1
+        if keyp [
+          make "key readchar
+          if :key = "j [
+            if :x > 2 [
+              if (and emptyp cell "board {:x - 1 :y}
+              emptyp cell "board {:x - 2 :y - 1}
+              emptyp cell "board {:x - 2 :y - 2}) [dec "x]]]
+          if :key = "k [
+            if :x < 10 [ if (and emptyp cell "board {:x + 1 :y} emptyp cell "board {:x + 1 :y - 1} emptyp cell "board {:x :y - 2}) [inc "x]]] if :key = "i [ if (and :y > 2 :x < 9 not :y = 20) [ if (and emptyp cell "board {:x + 1 :y + 1} emptyp cell "board {:x + 2 :y - 1}) [ make "piece "hess]]] if :key = "m [make "speed 0] clearchar ] sety 100 - :y * 10 setx -60 + :x * 10 voxeloid 10 20 10 fd 10 sl 10 voxeloid 10 20 10 if :speed > 0 [trackrender]
+        wait :speed
+        
+        if (or :y = 20
+        not emptyp cell "board {:x :y + 1}
+        not emptyp cell "board {:x - 1 :y}) [
+          setcell "board {:x :y} fc
+          setcell "board {:x :y - 1} fc
+          setcell "board {:x - 1 :y - 1} fc
+          setcell "board {:x - 1 :y - 2} fc
+          make "dropped true
+        ]
+        else [notrackrender repeat 4 [bt]]
+      ]
+      
+    ]
+    
+    ;if the game is over, don't bother checking for lines:
+    if :gameover [go "gameover]
+    
+    ;the following code checks to see if we've made any lines:
+    trackrender
+    ;turns on rendering the turtle track
+    
+    ;we're going to check every column of every row. Every time
+    ;we get a 'hit' checking a column, we add up a counter, called
+    ;"count. If :count hits 10, then we've made a line:
+    
+    repeat 20 [
+      make "count 0
+      repeat 10 [
+        if not emptyp cell "board {repcount repabove 1} [inc "count]
+      ]
+      ;repabove 1 returns the loop value of the repeat loop above
+      ;the current repeat loop. repabove 2 returns the loop count
+      ;above that, and so on
+      
+      ;if we've made a line, we need to shuffle every line above
+      ;it down one, in order to remove it:
+      
+      if :count = 10 [
+        inc "score
+        (print "Score: :score)
+        ;increase the player's score by one and display the score
+        
+        repeat repcount - 1 [
+          repeat 10 [
+            (setcell "board {repcount (repabove 2) - (repabove 1) + 1}
+            cell "board {repcount (repabove 2) - (repabove 1)})
+          ]
+        ]
+        
+        ;we need to remember to clear the line at the top:
+        repeat 10 [setcell "board {repcount 1} empty]
+        
+        ;now we need to redraw the playfield to match the table:
+        
+        notrackrender
+        cs
+        setfc 7
+        setpos [-60 -110]
+        voxeloid 10 210 10
+        voxeloid 120 10 10
+        setpos [50 -110]
+        voxeloid 10 210 10
+        ;draw the border
+        
+        ;we iterate through the table and if there's a color
+        ;recorded in the specific cell, we create a matching
+        ;voxel:
+        
+        repeat 20 [
+          repeat 10 [
+            setx -60 + 10 * repcount
+            sety 100 - 10 * repabove 1
+            if not emptyp cell "board {repcount repabove 1} [
+              setfc cell "board {repcount repabove 1} voxel 10]
+          ]
+        ]
+        
+        trackrender
+        
+      ]
+    ]
+    
+    label "gameover
+    
+  ]
+  ;game over, man... game over!
+  
+  print |Game Over!|
+  
+END

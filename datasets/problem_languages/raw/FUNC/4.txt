@@ -1,0 +1,5 @@
+if (op == 1) { ;; deploy new auction
+  int amount = in_msg_body~load_coins();
+  (cell state_init, cell body) = (cs~load_ref(), cs~load_ref());
+
+}

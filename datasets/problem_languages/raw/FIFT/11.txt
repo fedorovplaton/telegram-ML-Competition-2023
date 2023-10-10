@@ -1,0 +1,8 @@
+{ dup remaining abort"references in constructor tag"
+  dup 256 > abort"constructor tag too long"
+  tuck u@ 2 { -rot u@+ -rot <> abort"constructor tag mismatch" }
+} : (tagchk)
+{ [compile] x{ 2drop (tagchk) } ::_ ?x{
+{ [compile] b{ 2drop (tagchk) } ::_ ?b{
+{ <s ?x{4a} 16 u@+ 32 i@+ s> } : unpackTest
+x{4A4357C46535FF} s>c unpackTest swap . .

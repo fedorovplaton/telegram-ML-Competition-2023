@@ -1,0 +1,14 @@
+c This example prohibits two vowels in a row
+
+begin > use(precheck)
+
+group(precheck)
+  any(vowel) > context use(vowelstate)
+  nomatch > use(nostate)
+
+group(vowelstate) using keys
+  + any(vowel) > beep
+  nomatch > use(nostate)
+
+group(nostate) using keys
+  + any(cons) > index(cons, 1)

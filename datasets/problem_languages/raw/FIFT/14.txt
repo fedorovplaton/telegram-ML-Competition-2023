@@ -1,0 +1,9 @@
+<{ 11 THROWIF
+   CONT:<{ s3 s1 PUSH2 MUL s3 s1 PUSH2 MUL SUB
+           s4 s4 XCHG2 MUL -ROT MUL ADD }>
+   5 INT 1 INT 2DUP s4 PUSH CALLX
+   2DUP s4 PUSH CALLX
+   ROT 239 INT -1 INT ROT JMPX
+}>s
+dup csr.
+runvmdict .s

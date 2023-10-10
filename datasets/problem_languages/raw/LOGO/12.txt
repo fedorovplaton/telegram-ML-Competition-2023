@@ -1,0 +1,124 @@
+TO cateye
+  setfc 13
+  pu
+  rt 90
+  spot 10.1
+  fd 4
+  fiso 9.3 20
+  bk 8
+  rt 180
+  fiso 9.3 20
+  bk 4
+  ra 0.1
+  setfc 0
+  polyspot 6 40
+  lt 90
+  fd 3
+  fiso 5.2 7
+  bk 6
+  rt 180
+  fiso 5.2 7
+  bk 3
+END
+
+TO cat
+  sl 30
+  setfs 0
+  cateye
+  sr 60
+  cateye
+  sl 30
+  lo 0.3
+  bk 10
+  setfc 5
+  setfs 12
+  cylindroid 40 10 50 2
+  sl 20
+  lt 30
+  fd 25
+  tent 30 70 10
+  bk 25
+  rt 30
+  sr 40
+  rt 30
+  fd 25
+  tent 30 70 10
+  bk 25
+  lt 30
+  sl 20
+  bk 5
+  up 180
+  setfs 0
+  setfc 11
+  dome 5 20 20
+  fd 15
+  setfc 5
+  setfs 5
+  dome 8 20 20
+  lo 3
+  dropanchor
+  tether
+  pullout 7
+  rt 180
+  orbitright 70
+  setpw 2
+  repeat 2 [
+    repeat 5 [
+      line 80
+      orbitright 10
+    ]
+    orbitright 130
+  ]
+  pullin 7
+  rr 180
+  lo 12
+  rt 20
+  setfs 12
+  sr 20
+  setfs 13
+  cylindroid 40 100 50 2
+  lo 90
+  rr 90
+  setfs 12
+  cylinder 10 200 20
+  lo 200
+  dome 10 20 20
+  ra 200
+  rr 180
+  up 20
+  cylinder 10 130 20
+  lo 130
+  dome 10 20 20
+  ra 130
+  dn 40
+  cylinder 10 130 20
+  lo 130
+  dome 10 20 20
+  ra 130
+  sr 80
+  cylinder 10 130 20
+  lo 130
+  dome 10 20 20
+  ra 130
+  up 40
+  cylinder 10 130 20
+  lo 130
+  dome 10 20 20
+  ra 130
+END
+
+TO catring
+  cs
+  pu
+  dn 90
+  dropanchor
+  pullout 250
+  pu
+  repeat 8 [
+    pushturtle
+    up 90
+    cat
+    popturtle
+    orbitright 45
+  ]
+END

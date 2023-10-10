@@ -1,0 +1,19 @@
+{ bl word 1 2 ’ (create) } "::" 1 (create)
+{ bl word 0 2 ’ (create) } :': :'
+{ bl word 2 2 ’ (create) } :: :_
+{ bl word 3 2 ’ (create) } :: ::_
+{ bl word 0 (create) } : create
+{ bl word (forget) } : forget
+
+{ 1 { type space } does create } : says
+"hello" says hello
+"unknown error" says error
+{ hello error } : test
+test
+
+{ ."hello" } : hello
+{ ."unknown error" } : error
+
+{ <b x{4A} s, rot 16 u, swap 32 i, .s b>  } : mkTest
+17239 -1000000001 mkTest
+<s csr.

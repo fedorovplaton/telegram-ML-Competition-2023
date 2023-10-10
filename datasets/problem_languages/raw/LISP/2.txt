@@ -1,0 +1,33 @@
+#! /usr/bin/gcl -f
+
+; create a block of statements,
+;    can be placed anywhere a single statement would be,
+; first element of the block is treated as its name (not evaluated)
+; the return value of the block is the return value
+;    of the last statement
+
+(block
+   myBlockName
+   (format t "this is my block~%")
+   (format t "return the list 1 2 3~%")
+   '(1 2 3)
+)
+
+; the name allows us to have nested blocks, and thus
+;    to use the name of a specific block when we want to
+;    do something like return-from, e.g.
+(defvar result
+   (block
+      outer
+      (format t "in the outer block~%")
+      (block
+          inner
+          (format t "in the inner block~%")
+          (return-from outer 3))
+      (format t "back in the outer block~%"))) ; <-- never reached
+
+(format t "after all loops, result is ~A~%" result)
+
+; note that many of the different block forms (let, prog, etc)
+;    either use an implicit block name of nil
+;    or allow the programmer to assigne a name to the block

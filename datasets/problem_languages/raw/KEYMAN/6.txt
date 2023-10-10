@@ -1,0 +1,1 @@
+BOOL WINAPI KeyEvent(HWND hwndFocus, WORD KeyStroke, WCHAR KeyChar, DWORD ShiftFlags);

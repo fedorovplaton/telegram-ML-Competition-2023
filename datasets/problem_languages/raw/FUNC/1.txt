@@ -1,0 +1,12 @@
+(slice) load_data() inline {
+  var ds = get_data().begin_parse();
+  return 
+	(ds~load_msg_addr() ;; owner
+	 );
+}
+
+() save_data(slice owner_address) impure inline {
+  set_data(begin_cell()
+	.store_slice(owner_address)
+	.end_cell());
+}

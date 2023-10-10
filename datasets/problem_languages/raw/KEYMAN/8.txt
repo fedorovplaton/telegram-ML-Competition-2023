@@ -1,0 +1,1 @@
+BOOL WINAPI KeymanIMDestroy(PSTR keyboardname);

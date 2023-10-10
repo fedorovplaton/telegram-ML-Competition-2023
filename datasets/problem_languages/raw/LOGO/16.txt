@@ -1,0 +1,175 @@
+TO rocket
+  forward 70
+  down 90
+  ;these two commands orient the rocket better for use as
+  ;a turtle model
+
+  setfillcolor yellow
+  ;yellow is a function that returns the value 13
+  ;it is a shortcut used for convenience in learning
+  ;as is red, green, blue etc.
+
+  cylinder 20 120 10
+  ;cylinder takes
+
+  rollright 180
+  ;flip the turtle over to create the nose cone
+
+  cone 20 50 10
+
+  lower 50
+  ;lower the turtle to create the 'nose'
+
+  setfillcolor red
+  icosphere 3
+
+  setfillcolor orange
+  ra 50 + 120
+  ;ra is short for raise
+
+  rr 180
+  ;rr is shorthand for rollright
+
+  cutcone 20 30 30 10
+  ;move the turtle to the bottom of the rocket and
+  ;create the tail
+
+  up 90 bk 30.1
+  ;bk is short for back
+
+  setfillcolor white
+  repeat 2 [cylinderslice 40 5 20 10 rr 90]
+  ;create the fins
+
+  setfillcolor red
+  dn 90 sl 10 bk 10 cylinder 10 10 10
+  ;sl is short for slideleft
+
+  fd 20 cylinder 10 10 10 sr 20
+  ;fd is short for forward
+  ;sr is short for slideright
+
+  cylinder 10 10 10 bk 20 cylinder 10 10 10
+  ;create the jets
+
+END
+
+TO createmodel
+  clearscreen
+  ;cs is short for clearscreen
+
+  begintag "rocketmodel
+  ;tags are used to create turtle models
+  ;among other uses. You can also use them to
+  ;show or hide parts of the 'turtle track'
+
+  rocket
+  ;run the rocket procedure
+
+  endtag
+  ;close the tag
+
+  newmodel "rocket "rocketmodel
+  ;create a new model called 'rocket' based on the
+  ;rocketmodel tag
+
+  setmodel "rocket
+  ;set the turtle's model to the rocket model
+
+  clearscreen
+  ;clear away the tagged model, leaving only the
+  ;turtle
+END
+
+TO starfield :number
+  hideturtle
+  norender
+  ;suspend rendering of the scene until we're done drawing the stars
+  penup
+  repeat :number [
+    home
+    randomvectors randomfillcolor
+    ;randomvectors orients the turtle randomly
+    ;while randomfillcolor sets a random fill color
+
+    forward 1000 + random 1000
+    ;move forward a random distance
+
+    up 90
+    ;orient the turtle up in preparation of creating a spot
+    ;because the spot is created around and below the turtle
+
+    spot 10 + random 10
+    ;create a randomly-sized spot
+
+  ]
+
+  home
+  showturtle
+  render
+  ;resume rendering
+
+END
+
+TO main
+  reset
+  ;resets turtleSpaces to a default state
+
+  createmodel
+  ;execute the createmodel procedure
+
+  starfield 200
+  ;execute the starfield procedure, passing the parameter value 200
+
+  setmodelscale 0.5
+  ;decrease the size of the turtle model to half normal
+
+  setpremodel [lt 90]
+  ;inserts 'left 90' into the turtle track between the scene
+  ;and the turtle model ('pre' the model)
+
+  setfillcolor 14
+  ;sets the fillcolor to 14. Type 'showcolors' or 'sc' in the console
+  ;to see a list of default colors. You can also definecolor your own!
+
+  ico 50
+  ;create an icosphere (the planet)
+
+  penup
+  dropanchor
+  ;set the 'anchor point', or the point the turtle 'orbits' around
+  ;using the orbit commands, to the current turtle position
+
+  pullout 80
+  ;pull away 80 turtle units from the anchor point
+
+  snappy:newworker [forever [orbitleft 0.1]]
+  ;tell snappy the camera turtle to create a new routine or thread
+  ;that forever orbits around the scene to its left one tenth of
+  ;a degree at a time
+
+  make "rotation 0
+  ;define a container (variable) called 'rotation'
+  ;and set it to 0. We're going to use it to keep track of the
+  ;rotation of the rocket
+
+  forever [
+    inc "rotation
+    ;same as make "rotation :rotation + 1
+    ;there is also dec (decrement)
+
+    setpremodel {"lt 90 "rollright :rotation % 360}
+    ;curly braces indicate a 'softlist', a list that is evaluated
+    ;at runtime. In this case, so that we can have a dynamic
+    ;rotation value we pass to setpremodel
+
+    ;% is shorthand for modulus
+
+    orbitleft 1
+    ;orbit the rocket one degree to the left
+
+    wait 1
+    ;wait one sixtieth of a second
+
+  ]
+END

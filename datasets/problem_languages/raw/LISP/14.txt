@@ -1,0 +1,15 @@
+#! /usr/bin/gcl -f
+
+; treating lists like stacks with pop and push
+;  pop removes the car, push is like cons
+
+(defvar S  '(1 2 3))
+(format t "Initial stack ~A~%" S)
+(format t "popped ~A, result ~A~%" (pop S) S)
+(format t "pop ~A, stack ~A, pop ~A, stack ~A~%" (pop S) S (pop S) S)
+
+; pop from empty 
+(format t "pop ~A, stack ~A~%" (pop S) S)
+
+(format t "push 3, stack ~A~%" (push 3 S) S)
+(format t "push '(1 2), stack ~A~%" (push '(1 2) S) S)
