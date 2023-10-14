@@ -163,3 +163,5 @@ cython_debug/
 git_stats
 ignored
 datasets/final
+
+**/.DS_Store

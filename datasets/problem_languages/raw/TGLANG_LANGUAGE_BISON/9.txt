@@ -1,0 +1,23 @@
+#include <ctype.h>
+#include <stddef.h>
+
+int
+yylex (void)
+{
+  int c = getchar ();
+
+  /* Ignore white space, get first nonwhite character. */
+  while (c == ' ' || c == '\t')
+    c = getchar ();
+
+  if (c == EOF)
+    return YYEOF;
+
+  /* Char starts a number => parse the number. */
+  if (c == '.' || isdigit (c))
+    {
+      ungetc (c, stdin);
+      if (scanf ("%lf", &yylval.NUM) != 1)
+        abort ();
+      return NUM;
+    }

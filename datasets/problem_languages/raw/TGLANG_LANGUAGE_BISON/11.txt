@@ -1,0 +1,14 @@
+/* Called by yyparse on error. */
+void yyerror (char const *s)
+{
+  fprintf (stderr, "%s\n", s);
+}
+
+int main (int argc, char const* argv[])
+{
+  /* Enable parse traces on option -p. */
+  if (argc == 2 && strcmp(argv[1], "-p") == 0)
+    yydebug = 1;
+  init_table ();
+  return yyparse ();
+}

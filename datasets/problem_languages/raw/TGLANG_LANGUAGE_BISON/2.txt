@@ -1,0 +1,18 @@
+/* Location tracking calculator. */
+
+%{
+  #include <math.h>
+  int yylex (void);
+  void yyerror (char const *);
+%}
+
+/* Bison declarations. */
+%define api.value.type {int}
+%token NUM
+
+%left '-' '+'
+%left '*' '/'
+%precedence NEG
+%right '^'
+
+%% /* The grammar follows. */

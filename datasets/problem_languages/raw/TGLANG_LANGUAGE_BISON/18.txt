@@ -1,0 +1,22 @@
+%code
+{
+  namespace yy
+  {
+    // Return the next token.
+    auto yylex () -> parser::symbol_type
+    {
+      static int count = 0;
+      switch (int stage = count++)
+        {
+        case 0:
+          return parser::make_TEXT ("I have three numbers for you.");
+        case 1: case 2: case 3:
+          return parser::make_NUMBER (stage);
+        case 4:
+          return parser::make_TEXT ("And that's all!");
+        default:
+          return parser::make_YYEOF ();
+        }
+    }
+  }
+}

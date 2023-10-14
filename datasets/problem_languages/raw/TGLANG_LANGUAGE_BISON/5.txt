@@ -1,0 +1,18 @@
+%{
+  #include <stdio.h>  /* For printf, etc. */
+  #include <math.h>   /* For pow, used in the grammar. */
+  #include "calc.h"   /* Contains definition of 'symrec'. */
+  int yylex (void);
+  void yyerror (char const *);
+%}
+
+%define api.value.type union /* Generate YYSTYPE from these types: */
+%token <double>  NUM     /* Double precision number. */
+%token <symrec*> VAR FUN /* Symbol table pointer: variable/function. */
+%nterm <double>  exp
+
+%precedence '='
+%left '-' '+'
+%left '*' '/'
+%precedence NEG /* negation--unary minus */
+%right '^'      /* exponentiation */
