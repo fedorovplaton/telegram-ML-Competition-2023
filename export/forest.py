@@ -32,7 +32,7 @@ def convert_array_to_cpp_const(array: List[np.ndarray], c_type: str, var_name: s
     
     for arr in array:
         code_lines.append(
-            f"    {{{', '.join(str(val) for val in arr.tolist())}}},"
+            f"    {{{', '.join([str(val) for val in arr.tolist()] + ['0'] * (max_len - arr) )}}},"
         )
     code_lines.append("};")
     
