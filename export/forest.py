@@ -14,22 +14,24 @@ FIELD_TO_NAME_C_TYPE: Dict[str, str] = dict(
 
 
 def get_values_from_forest(forest: RandomForestClassifier, field: str) -> List[np.ndarray]:
-    return [
+    res = [
         dtree.tree_.__getattribute__(field)
         for dtree in forest
     ]
+    if field == "value":
+        res = [np.squeeze(arr, axis=(1,)).astype(int) for arr in res]
+    return res
 
 
 def convert_array_to_cpp_const(array: List[np.ndarray], c_type: str, var_name: str) -> str:
     dim = len(array[0].shape) + 1
-
     code_lines = [f"const {'std::vector<' * dim}{c_type}{'>' * dim} {var_name} = {{"]
     if dim == 2:
         for arr in array:
             code_lines.append(
                 f"    {{{', '.join(str(val) for val in arr.tolist())}}},"
             )
-    elif dim == 3:
+    else:
         for arr in array:
             sub_vectors = [
                 f"{{{', '.join([str(val) for val in row.tolist()])}}}"
@@ -66,4 +68,6 @@ def convert_forest_to_cpp(forest: RandomForestClassifier, save_path: Path) -> No
 if __name__ == "__main__":
     import joblib
     forest = joblib.load("../forest.pkl")
+    # val = forest[0].tree_.value
+    # print(convert_array_to_cpp_const(val, "int", "allClasses")[:100])
     convert_forest_to_cpp(forest, "../deploy/forest_params.h")
