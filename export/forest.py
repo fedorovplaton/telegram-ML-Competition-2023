@@ -21,7 +21,7 @@ def compress_value_array(value: np.ndarray):
 def get_values_from_forest(forest: RandomForestClassifier, field: str, dtype: type = int) -> List[np.ndarray]:
     return [
         dtree.tree_.__getattribute__(field).astype(dtype)
-        for dtree in forest
+        for dtree in forest[:1]
     ]
 
 
