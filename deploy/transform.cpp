@@ -34,24 +34,24 @@ std::vector<std::string> tokenize(std::string code_str) {
 }
 
 
-int main() {
-    std::ifstream input_file("../samples/input.txt");
-    if (!input_file) {
-        std::cout << "file input.txt doesn't exist" << std::endl;
-        return 1;
-    }
+// int main() {
+//     std::ifstream input_file("../samples/input.txt");
+//     if (!input_file) {
+//         std::cout << "file input.txt doesn't exist" << std::endl;
+//         return 1;
+//     }
     
-    std::string text((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
-    input_file.close();
+//     std::string text((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
+//     input_file.close();
     
-    std::vector<std::string> doc = tokenize(preprocess(text));
-    std::vector<double> result = tfidf(doc);
+//     std::vector<std::string> doc = tokenize(preprocess(text));
+//     std::vector<double> result = tfidf(doc);
     
-    for (size_t i = 0; i < result.size(); i++) {
-        if (result[i] != 0) {
-            std::cout << "(" << i << ", " << result[i] << ") ";
-        }
-    }
-    std::cout << std::endl;
-    return 0;
-}
+//     for (size_t i = 0; i < result.size(); i++) {
+//         if (result[i] != 0) {
+//             std::cout << "(" << i << ", " << result[i] << ") ";
+//         }
+//     }
+//     std::cout << std::endl;
+//     return 0;
+// }

@@ -12,9 +12,7 @@
 #include "threshold.h"
 #include "value.h"
 
-#define N_FEATURES 3000
-#define N_TREES 50
-
+#include "forest.h"
 
 int predictTree(const std::array<double, N_FEATURES>& features, int node, int tree) {
     while (allThresholds[tree][node] != -2) {
@@ -49,12 +47,12 @@ int predict(const std::array<double, N_FEATURES>& features) {
     return mostFrequentPrediction;
 }
 
-int main() {
-    std::array<double, N_FEATURES> features{};
-    std::cout << "start" << std::endl;
-    for (int i = 0; i < N_FEATURES; i++)
-        features[i] = 0.1;
-    std::cout << predict(features) << std::endl;
-    return 0;
+// int main() {
+//     std::array<double, N_FEATURES> features{};
+//     std::cout << "start" << std::endl;
+//     for (int i = 0; i < N_FEATURES; i++)
+//         features[i] = 0.1;
+//     std::cout << predict(features) << std::endl;
+//     return 0;
 
-}
+// }
