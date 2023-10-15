@@ -19,18 +19,18 @@ double tf(const std::string& t_, const std::unordered_map<std::string, int>& doc
     return 0.0;
 }
 
-std::vector<double> tfidf(const std::vector<std::string>& doc) {
+std::array<double, N_FEATURES> tfidf(const std::vector<std::string>& doc) {
     int doc_len = doc.size();
     std::unordered_map<std::string, int> map_doc;
     for (const std::string& t : doc) {
         map_doc[t] += 1;
     }
-    std::vector<double> res;
-    res.reserve(WORD_VEC.size());
+    std::array<double, N_FEATURES> res;
+    // res.reserve(WORD_VEC.size());
     for (size_t i = 0; i < WORD_VEC.size(); i++) {
-        double tf_val = tf(WORD_VEC[i], map_doc, doc_len);
-        double idf_val = IDF_VEC[i];
-        res.push_back(tf_val * idf_val);
+        // double tf_val = tf(WORD_VEC[i], map_doc, doc_len);
+        // double idf_val = IDF_VEC[i];
+        res[i] = IDF_VEC[i] * tf(WORD_VEC[i], map_doc, doc_len);
     }
     double l2 = 0.0;
     for (double val : res) {

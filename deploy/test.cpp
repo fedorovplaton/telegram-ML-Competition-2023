@@ -22,13 +22,8 @@ int main(int argc, char** argv) {
     input_file.close();
     
     std::vector<std::string> doc = tokenize(preprocess(text));
-    // std::cout << "tokenization done\n";
-    std::vector<double> result = tfidf(doc);
-    // std::cout << "TF-IDF done\n";
-    std::array<double, N_FEATURES> arr_res;
-    std::copy(result.begin(), result.end(), arr_res.begin());
-    // std::cout << "start predict\n";
-    int ans = predict(arr_res);
+    std::array<double, N_FEATURES> result = tfidf(doc);
+    int ans = predict(result);
     // std::cout << ans << std::endl;
 
     int K = 100;
@@ -38,8 +33,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < K; ++i) {
         doc = tokenize(preprocess(text));
         result = tfidf(doc);
-        std::copy(result.begin(), result.end(), arr_res.begin());
-        ans = predict(arr_res);
+        ans = predict(result);
     }
 
     auto endTime = std::chrono::high_resolution_clock::now();

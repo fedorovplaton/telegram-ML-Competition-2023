@@ -37,6 +37,7 @@ def convert_tfidf_to_cpp(tf_idf: TfidfVectorizer, save_path: str):
             "\n"    
             "#include <vector>\n",
             "#include <string>\n",
+            '#include "forest.h"\n',
         ]))
         h_file.write(
             convert_array_to_cpp_const(
@@ -49,7 +50,7 @@ def convert_tfidf_to_cpp(tf_idf: TfidfVectorizer, save_path: str):
             )
         )
         h_file.write("".join([
-            "\nstd::vector<double> tfidf(const std::vector<std::string>& doc);\n"
+            "\nstd::array<double, N_FEATURES> tfidf(const std::vector<std::string>& doc);\n"
             "\n#endif // TF_IDF_H\n"
         ]))
 

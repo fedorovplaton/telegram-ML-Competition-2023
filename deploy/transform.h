@@ -8,5 +8,6 @@
 
 std::string preprocess(std::string x);
 std::vector<std::string> tokenize(std::string code_str);
+// std::vector<std::string>&& tokenize(std::string&& code_str);
 
 #endif // TRANSFORM_H
