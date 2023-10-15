@@ -165,3 +165,9 @@ ignored
 datasets/final
 
 **/.DS_Store
+
+datasets/roseta/0000.parquet
+datasets/roseta/train-00000-of-00001-8b4da49264116bbf.parquet
+
+**/*.zip
+**/*.pkl
