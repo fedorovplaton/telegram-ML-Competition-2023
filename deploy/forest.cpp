@@ -1,10 +1,12 @@
 // #include <stdlib.h>
 // #include <stdio.h>
 #include <iostream>
-#include <math.h>
+// #include <math.h>
 #include <vector>
 #include <array>
 #include <map>
+#include <algorithm>
+#include <future>
 
 #include "children_left.h"
 #include "children_right.h"
@@ -30,7 +32,6 @@ int predict(const std::array<double, N_FEATURES>& features) {
     
     for (int tree = 0; tree < N_TREES; ++tree) {
         int prediction = predictTree(features, 0, tree);
-        std::cout << tree << std::endl;
         predictionsFrequency[prediction]++;
     }
     
@@ -46,13 +47,3 @@ int predict(const std::array<double, N_FEATURES>& features) {
     
     return mostFrequentPrediction;
 }
-
-// int main() {
-//     std::array<double, N_FEATURES> features{};
-//     std::cout << "start" << std::endl;
-//     for (int i = 0; i < N_FEATURES; i++)
-//         features[i] = 0.1;
-//     std::cout << predict(features) << std::endl;
-//     return 0;
-
-// }

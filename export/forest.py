@@ -21,18 +21,22 @@ def compress_value_array(value: np.ndarray):
 def get_values_from_forest(forest: RandomForestClassifier, field: str, dtype: type = int) -> List[np.ndarray]:
     return [
         dtree.tree_.__getattribute__(field).astype(dtype)
-        for dtree in forest[:1]
+        for dtree in forest
     ]
 
 
 def convert_array_to_cpp_const(array: List[np.ndarray], c_type: str, var_name: str) -> str:
     assert len(array[0].shape) == 1
     max_len = max(len(a) for a in array)
-    code_lines = [f"const std::vector<std::array<{c_type}, {max_len}>> {var_name} = {{"]
-    
+    code_lines = [f"std::vector<std::vector<{c_type}>> {var_name} = {{"]
+    size = len(array)
+    # print(size)
+    # code_lines = [f"const std::array<const std::array<{c_type}, {max_len}>, {size}> {var_name} = {{"]
     for arr in array:
+        # arr = arr[:7]
         code_lines.append(
-            f"    {{{', '.join([str(val) for val in arr.tolist()] + ['0'] * (max_len - len(arr)) )}}},"
+            f"    {{{', '.join([str(val) for val in arr.tolist()]+ ['0'] * (max_len - len(arr)) )}}},"
+            # f"    {', '.join([str(val) for val in arr.tolist()] + ['0'] * (max_len - len(arr)) )},"
         )
     code_lines.append("};")
     
