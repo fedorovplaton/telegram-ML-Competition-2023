@@ -2,8 +2,8 @@ import os
 import json
 from pathlib import Path
 
-tglang_2_gitlang_mapping_path = Path("tglang_2_gitlang_mapping.json")
-tglanguages_path = Path("tglanguages.txt")
+tglang_2_gitlang_mapping_path = Path("v0_tglang_2_gitlang_mapping.json")
+tglanguages_path = Path("v0_tglanguages.txt")
 source_code_root = Path("")
 
 with open(tglanguages_path) as f:

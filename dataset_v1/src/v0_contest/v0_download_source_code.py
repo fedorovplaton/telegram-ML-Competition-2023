@@ -10,8 +10,8 @@ import io
 import concurrent.futures
 
 
-tglang_2_urls_path = Path("tglang_2_urls.json")
-save_root = Path("ignored/git_code")
+tglang_2_urls_path = Path("v0_tglang_2_urls.json")
+save_root = Path("../../data/raw/git_code")
 
 
 def create_if_not_exists(path: Path):

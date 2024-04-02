@@ -4,8 +4,8 @@ from pathlib import Path
 import pandas as pd
 from os.path import join as path_join
 
-roseta_data_path = Path("datasets/roseta/raw/roseta_dataset.parquet")
-tglanguages_path = Path("tglanguages.txt")
+roseta_data_path = Path("../../data/processed/roseta_dataset.parquet")
+tglanguages_path = Path("v0_tglanguages.txt")
 
 error_404 = "404: Not Found"
 
