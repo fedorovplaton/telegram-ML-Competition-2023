@@ -299,5 +299,5 @@ print(problem_langs)
 
 print(len(mapping))
 
-with open("tglang_2_gitlang_mapping.json", "w+") as file:
+with open("v0_tglang_2_gitlang_mapping.json", "w+") as file:
     json.dump(mapping, file, indent=4)

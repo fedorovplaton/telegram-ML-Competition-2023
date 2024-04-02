@@ -4,9 +4,9 @@ from pathlib import Path
 from pprint import pprint
 import numpy as np
 
-tglang_2_gitlang_mapping_path = Path("tglang_2_gitlang_mapping.json")
-tglanguages_path = Path("tglanguages.txt")
-repo_info_lists_root = Path("ignored/repo_info_lists")
+tglang_2_gitlang_mapping_path = Path("v0_tglang_2_gitlang_mapping.json")
+tglanguages_path = Path("v0_tglanguages.txt")
+repo_info_lists_root = Path("../../../ignored/repo_info_lists")
 
 with open(tglanguages_path) as f:
     tglanguages = {tglang.strip(): idx for idx, tglang in enumerate(f.readlines())}
@@ -102,7 +102,7 @@ for key, value in tglang_2_urls.items():
 
 # https://pastebin.com/XfC2AaiX
 
-with open("tglang_2_urls.json", "w+") as f:
+with open("v0_tglang_2_urls.json", "w+") as f:
     json.dump(result_data, f, indent=2)
 
 print("broke_tglangs", broke_tglangs)

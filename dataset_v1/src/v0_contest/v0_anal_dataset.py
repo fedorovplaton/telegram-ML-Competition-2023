@@ -5,9 +5,9 @@ import pandas as pd
 from os.path import join as path_join
 from pprint import pprint
 
-dataset = pd.read_parquet("datasets/final/dataset_v0.parquet")
+dataset = pd.read_parquet("../../../datasets/final/dataset_v0.parquet")
 
-tglanguages_path = Path("tglanguages.txt")
+tglanguages_path = Path("v0_tglanguages.txt")
 
 with open(tglanguages_path) as f:
     tglanguages_to_idx = {tglang.strip(): idx for idx, tglang in enumerate(f.readlines())}

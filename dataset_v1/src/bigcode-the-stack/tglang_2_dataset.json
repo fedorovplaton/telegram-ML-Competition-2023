@@ -1,0 +1,180 @@
+{
+  "TGLANG_LANGUAGE_CPLUSPLUS": {
+    "language": "C++",
+    "filenames": [
+      "data/c++/train-00000-of-00214.parquet",
+      "data/c++/train-00001-of-00214.parquet",
+      "data/c++/train-00002-of-00214.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_CSHARP": {
+    "language": "C#",
+    "filenames": [
+      "data/c-sharp/train-00000-of-00142.parquet",
+      "data/c-sharp/train-00001-of-00142.parquet",
+      "data/c-sharp/train-00002-of-00142.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_DART": {
+    "language": "Dart",
+    "filenames": [
+      "data/dart/train-00000-of-00013.parquet",
+      "data/dart/train-00001-of-00013.parquet",
+      "data/dart/train-00002-of-00013.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_DOCKER": {
+    "language": "Dockerfile",
+    "filenames": [
+      "data/dockerfile/train-00000-of-00003.parquet",
+      "data/dockerfile/train-00001-of-00003.parquet",
+      "data/dockerfile/train-00002-of-00003.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_GO": {
+    "language": "Go",
+    "filenames": [
+      "data/go/train-00000-of-00115.parquet",
+      "data/go/train-00001-of-00115.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_JAVA": {
+    "language": "Java",
+    "filenames": [
+      "data/java/train-00000-of-00285.parquet",
+      "data/java/train-00001-of-00285.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_JAVASCRIPT": {
+    "language": "JavaScript",
+    "filenames": [
+      "data/javascript/train-00000-of-00499.parquet",
+      "data/javascript/train-00001-of-00499.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_KOTLIN": {
+    "language": "Kotlin",
+    "filenames": [
+      "data/kotlin/train-00000-of-00015.parquet",
+      "data/kotlin/train-00001-of-00015.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_LUA": {
+    "language": "Lua",
+    "filenames": [
+      "data/lua/train-00000-of-00008.parquet",
+      "data/lua/train-00001-of-00008.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_NGINX": {
+    "language": "Nginx",
+    "filenames": [
+      "data/nginx/train-00000-of-00001.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_POWERSHELL": {
+    "language": "PowerShell",
+    "filenames": [
+      "data/powershell/train-00001-of-00004.parquet",
+      "data/powershell/train-00002-of-00004.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_PYTHON": {
+    "language": "Python",
+    "filenames": [
+      "data/python/train-00000-of-00206.parquet",
+      "data/python/train-00001-of-00206.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_RUBY": {
+    "language": "Ruby",
+    "filenames": [
+      "data/ruby/train-00000-of-00029.parquet",
+      "data/ruby/train-00001-of-00029.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_RUST": {
+    "language": "Rust",
+    "filenames": [
+      "data/rust/train-00000-of-00040.parquet",
+      "data/rust/train-00001-of-00040.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_SHELL": {
+    "language": "Shell",
+    "filenames": [
+      "data/shell/train-00000-of-00011.parquet",
+      "data/shell/train-00001-of-00011.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_SOLIDITY": {
+    "language": "Solidity",
+    "filenames": [
+      "data/solidity/train-00000-of-00004.parquet",
+      "data/solidity/train-00001-of-00004.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_SWIFT": {
+    "language": "Swift",
+    "filenames": [
+      "data/swift/train-00000-of-00015.parquet",
+      "data/swift/train-00001-of-00015.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_TYPESCRIPT": {
+    "language": "TypeScript",
+    "filenames": [
+      "data/typescript/train-00000-of-00139.parquet",
+      "data/typescript/train-00001-of-00139.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_C": {
+    "language": "C",
+    "filenames": [
+      "data/c/train-00000-of-00257.parquet",
+      "data/c/train-00001-of-00257.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_CSS": {
+    "language": "CSS",
+    "filenames": [
+      "data/css/train-00000-of-00147.parquet",
+      "data/css/train-00001-of-00147.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_HTML": {
+    "language": "HTML",
+    "filenames": [
+      "data/html/train-00000-of-00802.parquet",
+      "data/html/train-00001-of-00802.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_JSON": {
+    "language": "JSON",
+    "filenames": [
+      "data/json/train-00000-of-01329.parquet",
+      "data/json/train-00001-of-01329.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_PHP": {
+    "language": "PHP",
+    "filenames": [
+      "data/php/train-00000-of-00198.parquet",
+      "data/php/train-00001-of-00198.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_SQL": {
+    "language": "SQL",
+    "filenames": [
+      "data/sql/train-00000-of-00021.parquet",
+      "data/sql/train-00001-of-00021.parquet"
+    ]
+  },
+  "TGLANG_LANGUAGE_XML": {
+    "language": "XML",
+    "filenames": [
+      "data/xml/train-00000-of-00297.parquet",
+      "data/xml/train-00001-of-00297.parquet"
+    ]
+  }
+}
